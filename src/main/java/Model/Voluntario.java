@@ -10,7 +10,7 @@ public class Voluntario extends Usuario {
     public Voluntario(String nombre, String usuario, String contraseña, String email) {
         super(nombre, usuario, contraseña, email);
         this.puntos = 0;
-        this.actividadesAsignadas = new ArrayList<Actividad>();
+        this.actividadesAsignadas = new ArrayList<>();
     }
 
     public int getPuntos() {
