@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Utils.Utilidades;
+import utils.Utilidades;
 
 import java.util.Scanner;
 
