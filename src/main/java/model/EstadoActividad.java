@@ -1,7 +1,15 @@
 package model;
 
 public enum EstadoActividad {
-    NOINICIADA, ENPROGRESO, COMPLETADA;
+    NoIniciada("No iniciada"), EnProgreso("En progreso"), Completada("Completada");
 
-    
+    private final String mensaje;
+
+    EstadoActividad(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
 }
