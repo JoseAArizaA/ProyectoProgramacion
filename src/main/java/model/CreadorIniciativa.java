@@ -29,9 +29,13 @@ public class CreadorIniciativa extends Usuario {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
-    public void crearIniciativas(String nombre, String descripcion, CreadorIniciativa creador, List<Actividad> actividades) {
-        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, creador, actividades);
+    public void crearIniciativa(String nombre, String descripcion, CreadorIniciativa creador) {
+        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, creador);
         iniciativasCreadas.add(iniciativa);
+    }
+
+    public void eliminarIniciativa(Iniciativa iniciativa) {
+        iniciativasCreadas.remove(iniciativa);
     }
 
     public void gestionarActividades(Iniciativa iniciativa, String accion) {
@@ -39,11 +43,15 @@ public class CreadorIniciativa extends Usuario {
     }
 
     public void asignarVoluntario(Actividad actividad, Voluntario voluntario) {
-
     }
 
     @Override
     public String getRol() {
         return "Creador";
+    }
+
+    @Override
+    public String toString() {
+        return "Creador: " + usuario;
     }
 }

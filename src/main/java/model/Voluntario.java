@@ -30,16 +30,40 @@ public class Voluntario extends Usuario {
     }
 
     public void unirseActividad(Actividad actividad) {
-
+        if (!this.actividadesAsignadas.contains(actividad)) {
+            this.actividadesAsignadas.add(actividad);
+            actividad.agregarVoluntario(this);
+            System.out.println("Se ha unido a la actividad: " + actividad.getNombre());
+        } else {
+            System.out.println("Usted ya se encuentra inscrito en esta actividad.");
+        }
     }
 
     public void cambiarEstadoActividad(Actividad actividad, String nuevoEstado, String comentario) {
+        if (this.actividadesAsignadas.contains(actividad)) {
+            actividad.cambiarEstado(nuevoEstado, comentario);
+            System.out.println("El estado de la actividad ha sido cambiado a: " + nuevoEstado);
+        } else {
+            System.out.println("Usted no se encuentra inscrito en esta actividad.");
+        }
+    }
 
+    public List<Actividad> verActividadesAsignadas() {
+        return this.actividadesAsignadas;
+    }
+
+    public void verPuntos() {
+        System.out.println("Puntos: " + this.puntos);
     }
 
     @Override
     public String getRol() {
         return "Voluntario";
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario= " + usuario;
     }
 }
 
