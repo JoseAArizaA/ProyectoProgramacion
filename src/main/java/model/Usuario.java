@@ -1,5 +1,9 @@
 package model;
 
+import exceptions.CorreoNoValidoException;
+import exceptions.NombreNoValidoException;
+import exceptions.UsuarioNoValidoException;
+
 import java.io.Serializable;
 
 public abstract class Usuario implements Serializable {
@@ -7,6 +11,10 @@ public abstract class Usuario implements Serializable {
     protected String usuario;
     protected String contrasena;
     protected String email;
+    protected String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+    protected String nombreRegex = "^[A-Za-zÁÉÍÓÚáéíóúÄËÏÖÜäëïöüÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÑñ]";
+    protected String usuarioRegex = "^[A-Za-z0-9]{3,20}";
+
     public Usuario(String nombre, String usuario, String contrasena, String email) {
         this.nombre = nombre;
         this.usuario = usuario;
@@ -18,7 +26,10 @@ public abstract class Usuario implements Serializable {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws NombreNoValidoException {
+        if(nombre == null || !nombre.matches(nombreRegex)){
+            throw new NombreNoValidoException("Por favor, introduzca un nombre válido. Caracteres especiales como guiones o puntos no están permitidos.");
+        }
         this.nombre = nombre;
     }
 
@@ -26,7 +37,10 @@ public abstract class Usuario implements Serializable {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(String usuario) throws UsuarioNoValidoException{
+        if(usuario == null || !usuario.matches(usuarioRegex)){
+            throw new UsuarioNoValidoException("El usuario debe contener entre 3 y 20 caracteres alfanuméricos. \nNo se permite el uso de caracteres especiales como vocales acentuadas, comas, puntos, guiones, etc.");
+        }
         this.usuario = usuario;
     }
 
@@ -42,7 +56,10 @@ public abstract class Usuario implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws CorreoNoValidoException {
+        if(email == null || !email.matches(emailRegex)){
+            throw new CorreoNoValidoException("Debe introducir una dirección de correo electrónico válida.");
+        }
         this.email = email;
     }
 
