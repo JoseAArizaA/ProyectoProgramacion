@@ -1,5 +1,4 @@
 package controller;
-
 import model.Usuario;
 import utils.XMLManager;
 import view.ViewRegistro;
