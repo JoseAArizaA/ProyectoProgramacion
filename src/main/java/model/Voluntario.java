@@ -29,14 +29,7 @@ public class Voluntario extends Usuario {
         this.actividadesAsignadas = actividadesAsignadas;
     }
 
-    public void unirseActividad(Actividad actividad) {
-        if (!this.actividadesAsignadas.contains(actividad)) {
-            this.actividadesAsignadas.add(actividad);
-            actividad.agregarVoluntario(this);
-            System.out.println("Se ha unido a la actividad: " + actividad.getNombre());
-        } else {
-            System.out.println("Usted ya se encuentra inscrito en esta actividad.");
-        }
+    public void solizitarActividad(Actividad actividad) {
     }
 
     public void cambiarEstadoActividad(Actividad actividad, String nuevoEstado, String comentario) {
@@ -63,7 +56,7 @@ public class Voluntario extends Usuario {
 
     @Override
     public String toString() {
-        return "Usuario= " + usuario;
+        return "Nombre: " + nombre + " Usuario= " + usuario;
     }
 }
 
