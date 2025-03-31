@@ -21,7 +21,7 @@ public class Actividad {
         this.fechaFin = fechaFin;
         this.voluntarioEncargado = voluntarioEncargado;
         this.estado = estado;
-        this.comentario = "";
+        this.comentario = comentario;
         this.voluntarios = new ArrayList<>();
     }
 
