@@ -19,4 +19,9 @@ public class Utilidades {
         }
         return numero;
     }
+
+    public static boolean validarContraseña(String contraseña) {
+        String regexContraseña = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return contraseña.matches(regexContraseña);
+    }
 }
