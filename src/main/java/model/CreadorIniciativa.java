@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreadorIniciativa extends Usuario {
+
+public class CreadorIniciativa extends Usuario implements Serializable {
     private String Ong;
     private List<Iniciativa> iniciativasCreadas;
 
@@ -11,6 +13,9 @@ public class CreadorIniciativa extends Usuario {
         super(nombre, usuario, contrasena, email);
         this.Ong = ong;
         this.iniciativasCreadas = new ArrayList<>();
+    }
+
+    public CreadorIniciativa() {
     }
 
     public String getOng() {

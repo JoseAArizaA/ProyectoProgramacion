@@ -1,5 +1,7 @@
 package utils;
 
+import exception.CorreoInvalidoException;
+
 import java.util.Scanner;
 
 public class Utilidades {
@@ -19,4 +21,15 @@ public class Utilidades {
         }
         return numero;
     }
+
+    public static boolean validarCorreo(String email) {
+        boolean valido = false;
+        if (!email.matches("^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+            throw new CorreoInvalidoException("El correo electrónico no es válido.");
+        } else {
+            valido = true;
+        }
+        return valido;
+    }
+
 }

@@ -1,5 +1,15 @@
+import controller.UsuarioController;
+import model.Usuario;
+import view.Vista;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        UsuarioController.cargarUsuarios();
+        Vista.mostrarMenuLogin();
+        UsuarioController.registrarUsuario();
+
     }
+
+
+
 }

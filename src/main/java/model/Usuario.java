@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 
+
 public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String usuario;
@@ -12,6 +13,9 @@ public abstract class Usuario implements Serializable {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.email = email;
+    }
+
+    public Usuario() {
     }
 
     public String getNombre() {

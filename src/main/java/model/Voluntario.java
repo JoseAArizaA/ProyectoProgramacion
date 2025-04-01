@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Voluntario extends Usuario {
+
+public class Voluntario extends Usuario implements Serializable {
     private int puntos;
     private List<Actividad> actividadesAsignadas;
 
@@ -12,6 +14,10 @@ public class Voluntario extends Usuario {
         this.puntos = 0;
         this.actividadesAsignadas = new ArrayList<>();
     }
+
+    public Voluntario() {
+    }
+
 
     public int getPuntos() {
         return puntos;
