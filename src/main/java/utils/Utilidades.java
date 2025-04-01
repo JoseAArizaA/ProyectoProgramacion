@@ -32,4 +32,9 @@ public class Utilidades {
         return valido;
     }
 
+
+    public static boolean validarContraseña(String contraseña) {
+        String regexContraseña = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
+        return contraseña.matches(regexContraseña);
+    }
 }
