@@ -38,7 +38,12 @@ public class CreadorIniciativa extends Usuario {
         iniciativasCreadas.remove(iniciativa);
     }
 
-    //¿Hace falta?/*public void gestionarActividades(Iniciativa iniciativa, String accion) {}
+    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) {
+        if (iniciativasCreadas.contains(iniciativa)) {
+            iniciativa.setNombre(nuevoNombre);
+            iniciativa.setDescripcion(nuevaDescripcion);
+        }
+    }
 
     @Override
     public String getRol() {
