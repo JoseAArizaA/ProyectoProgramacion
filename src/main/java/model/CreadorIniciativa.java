@@ -36,9 +36,9 @@ public class CreadorIniciativa extends Usuario {
     /**
      * Crea una nueva iniciativa, comprobando que los datos que les pasen no sean nulos.
      * @param nombre El nombre de la iniciativa.
-     * @param descripcion
-     * @return
-     * @throws NombreIniciativaIncorrectoException
+     * @param descripcion La descripción de la iniciativa.
+     * @return true si la iniciativa se creó correctamente, false en caso contrario.
+     * @throws NombreIniciativaIncorrectoException si el nombre o la descripción son nulos o vacíos.
      */
     public boolean crearIniciativa(String nombre, String descripcion) throws NombreIniciativaIncorrectoException {
         if (nombre == null || nombre.isBlank() || descripcion == null || descripcion.isBlank()) {
