@@ -1,5 +1,9 @@
 package model;
 
+import Exceptions.IniciativaIncorrectaException;
+import Exceptions.NombreIniciativaIncorrectoException;
+import Exceptions.NombreYDescripcionIniciativaIncorrectoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,19 +33,37 @@ public class CreadorIniciativa extends Usuario {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
-    public void crearIniciativa(String nombre, String descripcion, CreadorIniciativa creador) {
-        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, creador);
-        iniciativasCreadas.add(iniciativa);
+    /**
+     * Crea una nueva iniciativa, comprobando que los datos que les pasen no sean nulos.
+     * @param nombre El nombre de la iniciativa.
+     * @param descripcion
+     * @return
+     * @throws NombreIniciativaIncorrectoException
+     */
+    public boolean crearIniciativa(String nombre, String descripcion) throws NombreIniciativaIncorrectoException {
+        if (nombre == null || nombre.isBlank() || descripcion == null || descripcion.isBlank()) {
+            throw new NombreIniciativaIncorrectoException("El nombre y la descripción no pueden estar vacíos.");
+        }
+        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, this);
+        return iniciativasCreadas.add(iniciativa);
     }
 
-    public void eliminarIniciativa(Iniciativa iniciativa) {
-        iniciativasCreadas.remove(iniciativa);
+    public boolean eliminarIniciativa(Iniciativa iniciativa) {
+        return iniciativasCreadas.remove(iniciativa);
     }
 
-    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) {
-        if (iniciativasCreadas.contains(iniciativa)) {
+    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) throws NombreYDescripcionIniciativaIncorrectoException, IniciativaIncorrectaException {
+        if (iniciativa != null || iniciativasCreadas.contains(iniciativa)) {
             iniciativa.setNombre(nuevoNombre);
             iniciativa.setDescripcion(nuevaDescripcion);
+            if (nuevoNombre != null || nuevoNombre.isEmpty() || nuevaDescripcion != null || !nuevaDescripcion.isBlank()) {
+                iniciativa.setNombre(nuevoNombre);
+                iniciativa.setDescripcion(nuevaDescripcion);
+            } else {
+                throw new NombreYDescripcionIniciativaIncorrectoException("El nombre y la descripción no pueden estar vacíos.");
+            }
+        } else {
+            throw new IniciativaIncorrectaException("La iniciativa no pertenece a este creador.");
         }
     }
 

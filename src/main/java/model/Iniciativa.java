@@ -50,18 +50,44 @@ public class Iniciativa {
     }
 
     public void agregarActividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Voluntario voluntarioEncargado, EstadoActividad estado, String comentario) {
-        Actividad actividad = new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
-        this.actividades.add(actividad);
+        if (nombre == null || nombre.trim().isEmpty() || descripcion == null || descripcion.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre y la descripción de la actividad no pueden estar vacíos.");
+        }
+        if (fechaInicio == null || fechaFin == null || fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("Fechas inválidas. La fecha de inicio debe ser antes de la fecha de fin.");
+        }
+        if (estado == null) {
+            throw new IllegalArgumentException("El estado de la actividad no puede ser nulo.");
+        }
+
+        for (Actividad act : actividades) {
+            if (act.getNombre().equalsIgnoreCase(nombre)) {
+                throw new IllegalArgumentException("Ya existe una actividad con el mismo nombre en esta iniciativa.");
+            }
+        }
+
+        Actividad nuevaActividad = new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
+        this.actividades.add(nuevaActividad);
+        System.out.println("Actividad agregada con éxito.");
     }
 
-    public void eliminarActividad(Actividad actividad) {
-        this.actividades.remove(actividad);
+    public boolean eliminarActividad(Actividad actividad) {
+        if (actividad == null) {
+            throw new IllegalArgumentException("La actividad a eliminar no puede ser nula.");
+        }
+        return this.actividades.remove(actividad);
     }
 
     public void modificarActividad(Actividad actividad, Actividad nuevaActividad) {
+        if (actividad == null || nuevaActividad == null) {
+            throw new IllegalArgumentException("Las actividades no pueden ser nulas.");
+        }
         int index = this.actividades.indexOf(actividad);
-        if (index!= -1) {
+        if (index != -1) {
             this.actividades.set(index, nuevaActividad);
+            System.out.println("Actividad modificada correctamente.");
+        } else {
+            System.out.println("No se encontró la actividad para modificar.");
         }
     }
 

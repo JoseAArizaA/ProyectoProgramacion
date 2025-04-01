@@ -29,20 +29,27 @@ public class Voluntario extends Usuario {
         this.actividadesAsignadas = actividadesAsignadas;
     }
 
-    public void solizitarActividad(Actividad actividad) {
-    }
-
-    public void cambiarEstadoActividad(Actividad actividad, String nuevoEstado, String comentario) {
-        if (this.actividadesAsignadas.contains(actividad)) {
-            actividad.cambiarEstado(nuevoEstado, comentario);
-            System.out.println("El estado de la actividad ha sido cambiado a: " + nuevoEstado);
-        } else {
-            System.out.println("Usted no se encuentra inscrito en esta actividad.");
+    public void agregarPuntos(int puntos) {
+        if (puntos > 0) {
+            this.puntos += puntos;
         }
     }
 
-    public List<Actividad> verActividadesAsignadas() {
-        return this.actividadesAsignadas;
+    public void solicitarActividad(Actividad actividad) {
+    }
+
+    public void cambiarEstadoActividad(Actividad actividad, EstadoActividad nuevoEstado, String comentario) {
+        if (actividadesAsignadas.contains(actividad)) {
+            actividad.cambiarEstado(String.valueOf(nuevoEstado), comentario);
+            System.out.println("El estado de la actividad ha cambiado a: " + nuevoEstado.getMensaje());
+
+            if (nuevoEstado == EstadoActividad.Completada) {
+                agregarPuntos(10);
+                System.out.println("¡Has ganado 10 puntos! Puntos actuales: " + puntos);
+            }
+        } else {
+            System.out.println("No estás inscrito en esta actividad.");
+        }
     }
 
     public void verPuntos() {
