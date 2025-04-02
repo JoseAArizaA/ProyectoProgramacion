@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Vista {
     public static int mostrarMenuVoluntario() {
         System.out.println("Bienvenido al menu de voluntario: ");
-        System.out.println("1. Seleccionar actividad/es para unirse");
+        System.out.println("1. Solizitar actividad/es para unirse");
         System.out.println("2. Ver actividades en las que participo");
         System.out.println("3. Asignar estado a una actividad");
         System.out.println("4. Ver puntos");

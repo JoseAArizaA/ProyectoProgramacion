@@ -23,8 +23,7 @@ public class Actividad {
         this.fechaFin = fechaFin;
         this.voluntarioEncargado = voluntarioEncargado;
         this.estado = estado;
-        this.comentario = comentario;
-        this.voluntarios = new ArrayList<>();
+        this.comentario = "";
     }
 
     public String getNombre() {

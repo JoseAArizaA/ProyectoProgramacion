@@ -8,8 +8,6 @@ public class UsuarioController {
 
     public static void registrarUsuario() {
 
-
-
     }
 
 }

@@ -29,20 +29,33 @@ public class CreadorIniciativa extends Usuario {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
-    public void crearIniciativa(String nombre, String descripcion, CreadorIniciativa creador) {
-        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, creador);
-        iniciativasCreadas.add(iniciativa);
+    public boolean crearIniciativa(Iniciativa iniciativa) {
+        boolean creada = false;
+        if (iniciativa != null && !(iniciativasCreadas.contains(iniciativa))) {
+            iniciativasCreadas.add(iniciativa);
+            creada = true;
+        }
+        return creada;
     }
 
-    public void eliminarIniciativa(Iniciativa iniciativa) {
-        iniciativasCreadas.remove(iniciativa);
+    public boolean eliminarIniciativa(Iniciativa iniciativa) {
+        boolean eliminada = false;
+        if (iniciativa!= null && iniciativasCreadas.contains(iniciativa)) {
+            iniciativasCreadas.remove(iniciativa);
+            eliminada = true;
+        }
+        return eliminada;
     }
 
-    public void gestionarActividades(Iniciativa iniciativa, String accion) {
-
-    }
-
-    public void asignarVoluntario(Actividad actividad, Voluntario voluntario) {
+    public boolean actualizarIniciativa(Iniciativa iniciativa, String nuevaIniciativa) {
+        boolean actualizada = false;
+        if (iniciativa != null && iniciativasCreadas.contains(iniciativa)) {
+            iniciativa.setNombre(nuevaIniciativa);
+            iniciativa.setDescripcion(nuevaIniciativa);
+            iniciativa.setCreador(this);
+            actualizada = true;
+        }
+        return actualizada;
     }
 
     @Override
@@ -52,6 +65,6 @@ public class CreadorIniciativa extends Usuario {
 
     @Override
     public String toString() {
-        return "Creador: " + usuario;
+        return "Nombre: " + nombre + " Usuario: " + usuario;
     }
 }
