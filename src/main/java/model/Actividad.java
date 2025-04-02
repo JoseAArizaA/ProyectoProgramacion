@@ -22,7 +22,6 @@ public class Actividad {
         this.voluntarioEncargado = voluntarioEncargado;
         this.estado = estado;
         this.comentario = "";
-        this.voluntarios = new ArrayList<>();
     }
 
     public String getNombre() {

@@ -2,10 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Voluntario extends Usuario {
     private int puntos;
-    private List<Actividad> actividadesAsignadas;
+    private ArrayList<Actividad> actividadesAsignadas;
 
     public Voluntario(String nombre, String usuario, String contraseña, String email) {
         super(nombre, usuario, contraseña, email);
@@ -25,7 +26,7 @@ public class Voluntario extends Usuario {
         return actividadesAsignadas;
     }
 
-    public void setActividadesAsignadas(List<Actividad> actividadesAsignadas) {
+    public void setActividadesAsignadas(ArrayList<Actividad> actividadesAsignadas) {
         this.actividadesAsignadas = actividadesAsignadas;
     }
 
@@ -38,18 +39,24 @@ public class Voluntario extends Usuario {
     public void solicitarActividad(Actividad actividad) {
     }
 
-    public void cambiarEstadoActividad(Actividad actividad, EstadoActividad nuevoEstado, String comentario) {
+    public boolean cambiarEstadoActividad(Actividad actividad, EstadoActividad nuevoEstado, String comentario) {
+        boolean estadoCambiado = false;
+        boolean puntosAgregados = false;
         if (actividadesAsignadas.contains(actividad)) {
             actividad.cambiarEstado(String.valueOf(nuevoEstado), comentario);
-            System.out.println("El estado de la actividad ha cambiado a: " + nuevoEstado.getMensaje());
-
+            estadoCambiado = true;
             if (nuevoEstado == EstadoActividad.Completada) {
                 agregarPuntos(10);
-                System.out.println("¡Has ganado 10 puntos! Puntos actuales: " + puntos);
+                if (comentario == null || comentario.trim().isEmpty()) {
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Por favor, ingrese un comentario para la actividad completada:");
+                    comentario = sc.nextLine();
+                }
+                actividad.setComentario(comentario);
+                puntosAgregados = true;
             }
-        } else {
-            System.out.println("No estás inscrito en esta actividad.");
         }
+        return estadoCambiado && puntosAgregados;
     }
 
     public void verPuntos() {
