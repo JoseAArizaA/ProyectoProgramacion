@@ -43,12 +43,7 @@ public class CreadorIniciativa extends Usuario implements Serializable {
         iniciativasCreadas.remove(iniciativa);
     }
 
-    public void gestionarActividades(Iniciativa iniciativa, String accion) {
-
-    }
-
-    public void asignarVoluntario(Actividad actividad, Voluntario voluntario) {
-    }
+    //¿Hace falta?/*public void gestionarActividades(Iniciativa iniciativa, String accion) {}
 
     @Override
     public String getRol() {
@@ -57,6 +52,6 @@ public class CreadorIniciativa extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Creador: " + usuario;
+        return "Nombre: " + nombre + " Usuario: " + usuario;
     }
 }

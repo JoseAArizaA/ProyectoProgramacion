@@ -1,5 +1,6 @@
 package controller;
 import model.CreadorIniciativa;
+import model.Sesion;
 import model.Usuario;
 import model.Voluntario;
 import utils.HashSetContenedor;
@@ -101,5 +102,44 @@ public class UsuarioController {
         }
     }
 
+    public static boolean iniciarSesionCreador(String usuario, String contrasena) {
+        HashSetContenedor<CreadorIniciativa> creadores = XMLManager.readXML(new HashSetContenedor<>(new HashSet<>()), "creadores.xml");
 
+        if (creadores == null || creadores.getSet() == null) {
+            return false;
+        }
+
+        boolean encontrado = false;
+        for (CreadorIniciativa creador : creadores.getSet()) {
+            if (creador.getUsuario().equals(usuario) &&
+                    creador.getContrasena().equals(contrasena)) {
+                Sesion.getInstancia().iniciarSesion(creador);
+                encontrado = true;
+            }
+        }
+        return encontrado;
+    }
+
+    public static boolean iniciarSesionVoluntario(String usuario, String contrasena) {
+        HashSetContenedor<Voluntario> voluntarios = XMLManager.readXML(new HashSetContenedor<>(new HashSet<>()), "voluntarios.xml");
+
+        if (voluntarios == null || voluntarios.getSet() == null) {
+            return false;
+        }
+
+        boolean encontrado = false;
+        for (Voluntario voluntario : voluntarios.getSet()) {
+            if (voluntario.getUsuario().equals(usuario) &&
+                    voluntario.getContrasena().equals(contrasena)) {
+                Sesion.getInstancia().iniciarSesion(voluntario);
+                encontrado = true;
+            }
+        }
+        return encontrado;
+    }
+
+    public static void cerrarSesion() {
+        Sesion.getInstancia().cerrarSesion();
+        System.out.println("Sesión cerrada correctamente");
+    }
 }
