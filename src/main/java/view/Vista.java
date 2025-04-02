@@ -1,13 +1,15 @@
 package view;
 
+import controller.IniciativaController;
 import controller.VoluntarioController;
-import model.Actividad;
-import model.EstadoActividad;
-import model.Voluntario;
+import exceptions.FechaNoValidaException;
+import model.*;
 import utils.Utilidades;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static utils.Utilidades.leeFecha;
 
 public class Vista {
     public static int mostrarMenuVoluntario() {
@@ -40,48 +42,51 @@ public class Vista {
     }
 
     public static Actividad pideDatosActividad() {
-    Scanner sc = new Scanner(System.in);
-
-        Actividad actividad = new Actividad("", "", null, null, null, null, "");
-        LocalDate fechaInicio = null;
-        LocalDate fechaFin = null;
-        Voluntario encargado = null;
-        EstadoActividad estado = EstadoActividad.NoIniciada;
+        Scanner sc = new Scanner(System.in);
 
         Utilidades.leeCadena("Asigna un nombre para la actividad: ");
         String nombre = sc.nextLine();
-        actividad.setNombre(nombre);
 
         Utilidades.leeCadena("Descripción: ");
         String descripcion = sc.nextLine();
-        actividad.setDescripcion(descripcion);
 
-        Utilidades.leeCadena("Indique la fecha de inicio a continuación: ");
-        String fechaI = sc.nextLine();
-        LocalDate.parse(fechaI);
-        actividad.setFechaInicio(fechaInicio);
+        String fechaInicio;
+        try {
+            fechaInicio = leeFecha("Indique la fecha de inicio a continuación: ");
+        } catch (FechaNoValidaException e) {
+            throw new RuntimeException(e);
+        }
 
-        Utilidades.leeCadena("Escriba la fecha prevista para la finalización de la actividad: ");
-        String fechaF = sc.nextLine();
-        LocalDate.parse(fechaF);
-        actividad.setFechaFin(fechaFin);
+        String fechaFin;
+        try {
+            fechaFin = leeFecha("Indique la fecha prevista para la finalización de la actividad: ");
+        } catch (FechaNoValidaException e) {
+            throw new RuntimeException(e);
+        }
 
         Utilidades.leeCadena("¿Cuál es el estado actual de la actividad? Opciones disponibles: no iniciada, en curso o finalizada.");
         String estadoActual = sc.nextLine();
-        estadoActual.toUpperCase().equals(String.valueOf(estado));
-        actividad.setEstado(estado);
 
         Utilidades.leeCadena("Escriba aquí un comentario: ");
         String comentario = sc.nextLine();
-        actividad.setComentario(comentario);
 
         Utilidades.leeCadena("Por último seleccione un encargado entre la lista de voluntarios: ");
-       //VoluntarioController.muestraVoluntarios();
+        //VoluntarioController.muestraVoluntarios();
         String voluntarioEncargado = sc.nextLine();
-        voluntarioEncargado.equals(String.valueOf(encargado));
-        actividad.setVoluntarioEncargado(encargado);
 
-        return actividad;
+        return new Actividad(nombre, descripcion, fechaInicio, fechaFin, estadoActual, comentario, voluntarioEncargado);
     }
 
+    public static Iniciativa pideDatosIniciativa(ArrayList<Actividad>actividades){
+        Scanner sc = new Scanner(System.in);
+
+        Utilidades.leeCadena("Elija un nombre para la iniciativa: " );
+        String nombre = sc.nextLine();
+        Utilidades.leeCadena("Descripción: ");
+        String descripcion = sc.nextLine();
+        Utilidades.leeCadena("Creador de la iniciativa: ");
+        //autoasignar creador una vez creada la iniciativa??
+
+        return new Iniciativa(nombre, descripcion, creadorIniciativa);
+    }
 }
