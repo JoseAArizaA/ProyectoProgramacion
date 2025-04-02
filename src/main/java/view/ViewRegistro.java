@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class ViewRegistro {
     private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Metodo que pide los datos del usuario y devuelve un objeto de tipo CreadorIniciativa o Voluntario
+     * @return: Devuel un creado o voluntario con sus datos
+     */
     public static Usuario pideDatosUsuario() {
         Usuario usuario = null;
 

@@ -3,28 +3,50 @@ public class Sesion {
         private static Sesion instancia;
         private Usuario usuarioActual;
 
-        private Sesion() {}
+    /**
+     * Constructor por defecto
+     */
+    private Sesion() {}
 
-        public static Sesion getInstancia() {
+    /**
+     * Metodo que devuelve la instancia de la clase Sesion
+     * @return:Instancia de la clase Sesion
+     */
+    public static Sesion getInstancia() {
             if (instancia == null) {
                 instancia = new Sesion();
             }
             return instancia;
-        }
+    }
 
-        public void iniciarSesion(Usuario usuario) {
+    /**
+     * Inicia la sesion del usuario
+     * @param usuario: Usuario que inicia sesion
+     */
+    public void iniciarSesion(Usuario usuario) {
             this.usuarioActual = usuario;
-        }
+    }
 
-        public void cerrarSesion() {
+    /**
+     * Cierra la sesion del usuario
+     */
+    public void cerrarSesion() {
             this.usuarioActual = null;
-        }
+    }
 
-        public Usuario getUsuarioActual() {
+    /**
+     * Metodo que devuelve el usuario actual
+     * @return:Usuario actual
+     */
+    public Usuario getUsuarioActual() {
             return usuarioActual;
-        }
+    }
 
-        public boolean estaActiva() {
+    /**
+     * Metodo que devuelve si la sesion esta activa
+     * @return: true si la sesion esta activa, false si no
+     */
+    public boolean estaActiva() {
             return usuarioActual != null;
-        }
+    }
 }
