@@ -54,7 +54,7 @@ public class Utilidades {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         while (fecha == null) {
-            System.out.println("Introduce una fecha en el formato dd/MM/yyyy:");
+            System.out.println("Introduce una fecha en el siguiente formato: dd/MM/yyyy:");
             String input = sc.nextLine();
             try {
                 fecha = LocalDate.parse(input);

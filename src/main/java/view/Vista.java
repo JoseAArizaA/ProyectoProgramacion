@@ -41,6 +41,7 @@ public class Vista {
         return opcion;
     }
 
+
     public static Actividad pideDatosActividad() {
         Scanner sc = new Scanner(System.in);
 
@@ -76,6 +77,7 @@ public class Vista {
 
         return new Actividad(nombre, descripcion, fechaInicio, fechaFin, estadoActual, comentario, voluntarioEncargado);
     }
+
 
     public static Iniciativa pideDatosIniciativa(ArrayList<Actividad>actividades){
         Scanner sc = new Scanner(System.in);
