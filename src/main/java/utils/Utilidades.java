@@ -1,6 +1,7 @@
 package utils;
 
-import exception.CorreoInvalidoException;
+import exceptions.ContraseñaInvalidaException;
+import exceptions.CorreoInvalidoException;
 
 import java.util.Scanner;
 
@@ -34,7 +35,13 @@ public class Utilidades {
 
 
     public static boolean validarContraseña(String contraseña) {
-        String regexContraseña = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
-        return contraseña.matches(regexContraseña);
+        boolean valido = false;
+        if (!contraseña.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$")){
+            throw new ContraseñaInvalidaException("La contraseña no es válida.");
+        } else {
+            valido = true;
+        }
+
+        return valido;
     }
 }

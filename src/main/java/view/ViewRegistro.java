@@ -1,6 +1,7 @@
 package view;
 
-import exception.CorreoInvalidoException;
+import exceptions.ContraseñaInvalidaException;
+import exceptions.CorreoInvalidoException;
 import model.CreadorIniciativa;
 import model.Usuario;
 import model.Voluntario;
@@ -24,8 +25,21 @@ public class ViewRegistro {
         System.out.println("Ingrese tu nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
 
-        System.out.println("Ingrese tu contraseña: ");
-        String contrasena = scanner.nextLine();
+        String contrasena;
+        boolean contrasenaValida = false;
+        do{
+            System.out.println("Ingrese tu contraseña: ");
+            contrasena = scanner.nextLine();
+            contrasenaValida = true;
+            try{
+                Utilidades.validarContraseña(contrasena);
+            } catch (ContraseñaInvalidaException e){
+                System.out.println(e.getMessage());
+                contrasenaValida = false;
+            }
+        }while (!contrasenaValida);
+
+
 
         String email;
         boolean correoValido;

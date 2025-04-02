@@ -1,9 +1,9 @@
 package model;
 
 import java.io.Serializable;
-import Exceptions.IniciativaIncorrectaException;
-import Exceptions.NombreIniciativaIncorrectoException;
-import Exceptions.NombreYDescripcionIniciativaIncorrectoException;
+import exceptions.IniciativaIncorrectaException;
+import exceptions.NombreIniciativaIncorrectoException;
+import exceptions.NombreYDescripcionIniciativaIncorrectoException;
 
 import java.util.ArrayList;
 import java.util.List;

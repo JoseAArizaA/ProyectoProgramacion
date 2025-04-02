@@ -1,8 +1,8 @@
 package controller;
 
-import Exceptions.IniciativaIncorrectaException;
-import Exceptions.NombreIniciativaIncorrectoException;
-import Exceptions.NombreYDescripcionIniciativaIncorrectoException;
+import exceptions.IniciativaIncorrectaException;
+import exceptions.NombreIniciativaIncorrectoException;
+import exceptions.NombreYDescripcionIniciativaIncorrectoException;
 import model.CreadorIniciativa;
 import model.Iniciativa;
 

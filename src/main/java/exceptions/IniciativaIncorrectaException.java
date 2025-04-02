@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class IniciativaIncorrectaException extends Exception {
     public IniciativaIncorrectaException(String message) {
