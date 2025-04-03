@@ -1,5 +1,8 @@
 package utils;
 
+import exceptions.ContraseñaInvalidaException;
+import exceptions.CorreoInvalidoException;
+
 import java.util.Scanner;
 
 public class Utilidades {
@@ -20,8 +23,25 @@ public class Utilidades {
         return numero;
     }
 
+    public static boolean validarCorreo(String email) {
+        boolean valido = false;
+        if (!email.matches("^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+            throw new CorreoInvalidoException("El correo electrónico no es válido.");
+        } else {
+            valido = true;
+        }
+        return valido;
+    }
+
+
     public static boolean validarContraseña(String contraseña) {
-        String regexContraseña = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
-        return contraseña.matches(regexContraseña);
+        boolean valido = false;
+        if (!contraseña.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$")){
+            throw new ContraseñaInvalidaException("La contraseña no es válida.");
+        } else {
+            valido = true;
+        }
+
+        return valido;
     }
 }

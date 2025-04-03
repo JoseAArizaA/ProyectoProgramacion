@@ -2,7 +2,10 @@ package view;
 
 import utils.Utilidades;
 
+import java.util.Scanner;
+
 public class Vista {
+
     public static int mostrarMenuVoluntario() {
         System.out.println("Bienvenido al menu de voluntario: ");
         System.out.println("1. Solizitar actividad/es para unirse");
@@ -31,6 +34,28 @@ public class Vista {
         System.out.println("2.Registrarse");
         int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
         return opcion;
+    }
+
+    public static int mostrarMenuEleccion(){
+        System.out.println("Como quiere Iniciar Sesion: ");
+        System.out.println("1. Creador");
+        System.out.println("2. Voluntario");
+        int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
+        return opcion;
+    }
+
+    public static String pedirUsuario() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Usuario: ");
+        String usuario = teclado.nextLine();
+        return usuario;
+    }
+
+    public static String pedirContrasena() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Contraseña: ");
+        String contrasena = teclado.nextLine();
+        return contrasena;
     }
 
 }

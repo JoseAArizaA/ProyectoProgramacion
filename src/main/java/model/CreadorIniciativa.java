@@ -1,5 +1,10 @@
 package model;
 
+import java.io.Serializable;
+import exceptions.IniciativaIncorrectaException;
+import exceptions.NombreIniciativaIncorrectoException;
+import exceptions.NombreYDescripcionIniciativaIncorrectoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +16,9 @@ public class CreadorIniciativa extends Usuario {
         super(nombre, usuario, contrasena, email);
         this.Ong = ong;
         this.iniciativasCreadas = new ArrayList<>();
+    }
+
+    public CreadorIniciativa() {
     }
 
     public String getOng() {
@@ -29,13 +37,19 @@ public class CreadorIniciativa extends Usuario {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
-    public boolean crearIniciativa(Iniciativa iniciativa) {
-        boolean creada = false;
-        if (iniciativa != null && !(iniciativasCreadas.contains(iniciativa))) {
-            iniciativasCreadas.add(iniciativa);
-            creada = true;
+    /**
+     * Crea una nueva iniciativa, comprobando que los datos que les pasen no sean nulos.
+     * @param nombre El nombre de la iniciativa.
+     * @param descripcion La descripción de la iniciativa.
+     * @return true si la iniciativa se creó correctamente, false en caso contrario.
+     * @throws NombreIniciativaIncorrectoException si el nombre o la descripción son nulos o vacíos.
+     */
+    public boolean crearIniciativa(String nombre, String descripcion) throws NombreIniciativaIncorrectoException {
+        if (nombre == null || nombre.isBlank() || descripcion == null || descripcion.isBlank()) {
+            throw new NombreIniciativaIncorrectoException("El nombre y la descripción no pueden estar vacíos.");
         }
-        return creada;
+        Iniciativa iniciativa = new Iniciativa(nombre, descripcion, this);
+        return iniciativasCreadas.add(iniciativa);
     }
 
     public boolean eliminarIniciativa(Iniciativa iniciativa) {

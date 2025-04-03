@@ -1,5 +1,8 @@
 package controller;
 
+import exceptions.IniciativaIncorrectaException;
+import exceptions.NombreIniciativaIncorrectoException;
+import exceptions.NombreYDescripcionIniciativaIncorrectoException;
 import model.CreadorIniciativa;
 import model.Iniciativa;
 
@@ -12,6 +15,31 @@ public class CreadorController {
         this.creador = creador;
     }
 
+    public void crearIniciativa(String nombre, String descripcion) throws NombreIniciativaIncorrectoException {
+        try {
+            creador.crearIniciativa(nombre, descripcion);
+            System.out.println("Iniciativa creada con éxito.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al crear la iniciativa: " + e.getMessage());
+        }
+    }
+
+    public void eliminarIniciativa(Iniciativa iniciativa) {
+        if (creador.eliminarIniciativa(iniciativa)) {
+            System.out.println("Iniciativa eliminada con éxito.");
+        } else {
+            System.out.println("No se encontró la iniciativa para eliminar.");
+        }
+    }
+
+    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) throws NombreYDescripcionIniciativaIncorrectoException, IniciativaIncorrectaException {
+        try {
+            creador.actualizarIniciativa(iniciativa, nuevoNombre, nuevaDescripcion);
+            System.out.println("Iniciativa actualizada con éxito.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al actualizar la iniciativa: " + e.getMessage());
+        }
+    }
 
     public void listarIniciativas() {
         List<Iniciativa> iniciativas = creador.getIniciativasCreadas();
