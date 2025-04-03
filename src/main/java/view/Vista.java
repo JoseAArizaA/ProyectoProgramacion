@@ -1,9 +1,6 @@
 package view;
 
-import model.Actividad;
-import model.EstadoActividad;
-import model.Iniciativa;
-import model.Voluntario;
+import model.*;
 import utils.Utilidades;
 
 import java.time.LocalDate;
@@ -43,7 +40,6 @@ public class Vista {
         String creador = teclado.nextLine();
         iniciativa = new Iniciativa(nombre, descripcion, new CreadorIniciativa(creador));
         return iniciativa;*/
-        return null;
     }
 
     public static Actividad pideDatosActividad() {
