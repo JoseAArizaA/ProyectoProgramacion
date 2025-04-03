@@ -14,12 +14,12 @@ public class CreadorController {
     }
 
     public void crearIniciativa() {
-        Iniciativa iniciativa = Vista.pideDatosIniciativa();
+        /*Iniciativa iniciativa = Vista.pideDatosIniciativa();
         if (creador.crearIniciativa(iniciativa)) {
             System.out.println("Iniciativa creada con éxito.");
         } else {
             System.out.println("Error al crear la iniciativa.");
-        }
+        }*/
     }
 
     /**
@@ -29,7 +29,7 @@ public class CreadorController {
      * con el nombre proporcionado. A continuación, intenta eliminar la iniciativa.
      */
     public void eliminarIniciativa() {
-        String nombreIniciativa = Vista.pideNombreIniciativa();
+        /*String nombreIniciativa = Vista.pideNombreIniciativa();
         Iniciativa iniciativa = creador.getIniciativasCreadas().stream()
                 .filter(i -> i.getNombre().equals(nombreIniciativa))
                 .findFirst()
@@ -38,7 +38,7 @@ public class CreadorController {
             System.out.println("Iniciativa eliminada con éxito.");
         } else {
             System.out.println("Error al eliminar la iniciativa.");
-        }
+        }*/
     }
 
     public void actualizarIniciativa() {

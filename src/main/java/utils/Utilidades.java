@@ -1,10 +1,7 @@
 package utils;
 
-import exceptions.*;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import exceptions.ContraseñaInvalidaException;
+import exceptions.CorreoInvalidoException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,10 +37,10 @@ public class Utilidades {
     }
 
 
-    public static boolean validarContrasenna(String contrasenna) {
+    public static boolean validarContraseña(String contraseña) {
         boolean valido = false;
-        if (!contrasenna.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$")) {
-            throw new ContrasennaInvalidaException("La contraseña no es válida.");
+        if (!contraseña.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$")){
+            throw new ContraseñaInvalidaException("La contraseña no es válida.");
         } else {
             valido = true;
         }
@@ -91,9 +88,6 @@ public class Utilidades {
         return fecha;
     }
 }
-
-        return descripcion;
-    }
 
     public static String maximoCaracteresComentario(String msn) throws LimiteCaracteresException {
         Scanner sc = new Scanner(System.in);
