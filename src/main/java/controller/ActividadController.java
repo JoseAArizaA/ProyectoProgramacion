@@ -6,12 +6,12 @@ import model.Actividad;
 import model.EstadoActividad;
 import model.Voluntario;
 import view.Vista;
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static utils.Utilidades.leeCadena;
 import static utils.Utilidades.leeFecha;
+import static view.Vista.pideDatosActividad;
 
 public class ActividadController {
     private HashSet<Voluntario> voluntarios;
@@ -24,8 +24,8 @@ public class ActividadController {
         this.encargado = encargado;
     }
 
-    public Actividad crearActividad(){
-        return Vista.pideDatosActividad();
+    public Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
+        return pideDatosActividad();
     }
 
     public Actividad modificarActividad(ArrayList<Actividad> actividades) throws FechaNoValidaException, NombreNoValidoException{

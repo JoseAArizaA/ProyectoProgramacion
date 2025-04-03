@@ -3,9 +3,6 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static model.EstadoActividad.NoIniciada;
-
 public class Actividad {
     private String nombre;
     private String descripcion;

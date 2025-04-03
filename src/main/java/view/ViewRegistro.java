@@ -1,6 +1,6 @@
 package view;
 
-import exceptions.ContraseñaInvalidaException;
+import exceptions.ContrasennaInvalidaException;
 import exceptions.CorreoInvalidoException;
 import model.CreadorIniciativa;
 import model.Usuario;
@@ -19,21 +19,21 @@ public class ViewRegistro {
     public static Usuario pideDatosUsuario() {
         Usuario usuario = null;
 
-        System.out.println("Ingrese tu nombre: ");
+        System.out.println("Ingrese su nombre: ");
         String nombre = scanner.nextLine();
 
-        System.out.println("Ingrese tu nombre de usuario: ");
+        System.out.println("Ingrese su nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
 
         String contrasena;
         boolean contrasenaValida = false;
         do{
-            System.out.println("Ingrese tu contraseña: ");
+            System.out.println("Ingrese su contraseña: ");
             contrasena = scanner.nextLine();
             contrasenaValida = true;
             try{
-                Utilidades.validarContraseña(contrasena);
-            } catch (ContraseñaInvalidaException e){
+                Utilidades.validarContrasenna(contrasena);
+            } catch (ContrasennaInvalidaException e){
                 System.out.println(e.getMessage());
                 contrasenaValida = false;
             }
@@ -57,7 +57,7 @@ public class ViewRegistro {
 
         String rol;
         do{
-            System.out.println("Ingrese tu rol (Voluntario o Creador): ");
+            System.out.println("Ingrese su rol (Voluntario o Creador): ");
              rol = scanner.nextLine();
         }while(!rol.equals("Voluntario") && !rol.equals("Creador"));
 
@@ -65,7 +65,7 @@ public class ViewRegistro {
         if (rol.equals("Voluntario")) {
             usuario = new Voluntario(nombre, nombreUsuario, contrasena, email);
         } else if (rol.equals("Creador")) {
-            System.out.println("Ingrese tu ONG: ");
+            System.out.println("Ingrese su ONG: ");
             String ong = scanner.nextLine();
             usuario = new CreadorIniciativa(nombre, nombreUsuario, contrasena, email, ong);
         }
