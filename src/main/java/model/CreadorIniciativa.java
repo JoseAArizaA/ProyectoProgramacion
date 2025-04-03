@@ -8,8 +8,7 @@ import exceptions.NombreYDescripcionIniciativaIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class CreadorIniciativa extends Usuario implements Serializable {
+public class CreadorIniciativa extends Usuario {
     private String Ong;
     private List<Iniciativa> iniciativasCreadas;
 
@@ -54,22 +53,23 @@ public class CreadorIniciativa extends Usuario implements Serializable {
     }
 
     public boolean eliminarIniciativa(Iniciativa iniciativa) {
-        return iniciativasCreadas.remove(iniciativa);
+        boolean eliminada = false;
+        if (iniciativa!= null && iniciativasCreadas.contains(iniciativa)) {
+            iniciativasCreadas.remove(iniciativa);
+            eliminada = true;
+        }
+        return eliminada;
     }
 
-    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) throws NombreYDescripcionIniciativaIncorrectoException, IniciativaIncorrectaException {
-        if (iniciativa != null || iniciativasCreadas.contains(iniciativa)) {
-            iniciativa.setNombre(nuevoNombre);
-            iniciativa.setDescripcion(nuevaDescripcion);
-            if (nuevoNombre != null || nuevoNombre.isEmpty() || nuevaDescripcion != null || !nuevaDescripcion.isBlank()) {
-                iniciativa.setNombre(nuevoNombre);
-                iniciativa.setDescripcion(nuevaDescripcion);
-            } else {
-                throw new NombreYDescripcionIniciativaIncorrectoException("El nombre y la descripción no pueden estar vacíos.");
-            }
-        } else {
-            throw new IniciativaIncorrectaException("La iniciativa no pertenece a este creador.");
+    public boolean actualizarIniciativa(Iniciativa iniciativa, String nuevaIniciativa) {
+        boolean actualizada = false;
+        if (iniciativa != null && iniciativasCreadas.contains(iniciativa)) {
+            iniciativa.setNombre(nuevaIniciativa);
+            iniciativa.setDescripcion(nuevaIniciativa);
+            iniciativa.setCreador(this);
+            actualizada = true;
         }
+        return actualizada;
     }
 
     @Override

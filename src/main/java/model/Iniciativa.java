@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +7,12 @@ public class Iniciativa {
     private String nombre;
     private String descripcion;
     private CreadorIniciativa creador;
-    private List<Actividad> actividades;
+    private ArrayList<Actividad> actividades;
 
     public Iniciativa(String nombre, String descripcion, CreadorIniciativa creador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.creador = creador;
-        this.actividades = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -45,50 +43,39 @@ public class Iniciativa {
         return actividades;
     }
 
-    public void setActividades(List<Actividad> actividades) {
+    public void setActividades(ArrayList<Actividad> actividades) {
         this.actividades = actividades;
     }
 
-    public void agregarActividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Voluntario voluntarioEncargado, EstadoActividad estado, String comentario) {
-        if (nombre == null || nombre.trim().isEmpty() || descripcion == null || descripcion.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre y la descripción de la actividad no pueden estar vacíos.");
+    public boolean agregarActividad(Actividad actividad) {
+        boolean agregada = false;
+        if (actividad != null && !(actividades.contains(actividad))) {
+            actividades.add(actividad);
+            agregada = true;
         }
-        if (fechaInicio == null || fechaFin == null || fechaInicio.isAfter(fechaFin)) {
-            throw new IllegalArgumentException("Fechas inválidas. La fecha de inicio debe ser antes de la fecha de fin.");
-        }
-        if (estado == null) {
-            throw new IllegalArgumentException("El estado de la actividad no puede ser nulo.");
-        }
+        return agregada;
+    }
 
-        for (Actividad act : actividades) {
-            if (act.getNombre().equalsIgnoreCase(nombre)) {
-                throw new IllegalArgumentException("Ya existe una actividad con el mismo nombre en esta iniciativa.");
+    public boolean eliminarActividad(String nombreActividad) {
+        boolean eliminada = false;
+        for (int i = 0; i < actividades.size(); i++) {
+            if (actividades.get(i).getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
+                actividades.remove(i);
+                eliminada = true;
             }
         }
-
-        Actividad nuevaActividad = new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
-        this.actividades.add(nuevaActividad);
-        System.out.println("Actividad agregada con éxito.");
+        return eliminada;
     }
 
-    public boolean eliminarActividad(Actividad actividad) {
-        if (actividad == null) {
-            throw new IllegalArgumentException("La actividad a eliminar no puede ser nula.");
+    public boolean modificarActividad(String nombreActividad, Actividad nuevaActividad) {
+        boolean modificada = false;
+        for (int i = 0; i < actividades.size(); i++) {
+            if (actividades.get(i).getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
+                actividades.set(i, nuevaActividad);
+                modificada = true;
+            }
         }
-        return this.actividades.remove(actividad);
-    }
-
-    public void modificarActividad(Actividad actividad, Actividad nuevaActividad) {
-        if (actividad == null || nuevaActividad == null) {
-            throw new IllegalArgumentException("Las actividades no pueden ser nulas.");
-        }
-        int index = this.actividades.indexOf(actividad);
-        if (index != -1) {
-            this.actividades.set(index, nuevaActividad);
-            System.out.println("Actividad modificada correctamente.");
-        } else {
-            System.out.println("No se encontró la actividad para modificar.");
-        }
+        return modificada;
     }
 
     @Override
