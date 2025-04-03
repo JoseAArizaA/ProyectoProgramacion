@@ -19,7 +19,6 @@ public class Voluntario extends Usuario implements Serializable {
     public Voluntario() {
     }
 
-
     public int getPuntos() {
         return puntos;
     }
@@ -42,10 +41,17 @@ public class Voluntario extends Usuario implements Serializable {
         }
     }
 
-    public void solicitarActividad(Actividad actividad) {
+    public boolean unirseActividad(Actividad actividad) {
+        boolean agregado = false;
+        if (actividad != null && actividadesAsignadas.contains(actividad)) {
+            actividad.agregarVoluntario(this);
+            agregado = true;
+        }
+        return agregado;
     }
 
     public boolean cambiarEstadoActividad(Actividad actividad, EstadoActividad nuevoEstado, String comentario) {
+        Scanner sc = new Scanner(System.in);
         boolean estadoCambiado = false;
         boolean puntosAgregados = false;
         if (actividadesAsignadas.contains(actividad)) {
@@ -53,11 +59,8 @@ public class Voluntario extends Usuario implements Serializable {
             estadoCambiado = true;
             if (nuevoEstado == EstadoActividad.Completada) {
                 agregarPuntos(10);
-                if (comentario == null || comentario.trim().isEmpty()) {
-                    Scanner sc = new Scanner(System.in);
-                    System.out.println("Por favor, ingrese un comentario para la actividad completada:");
-                    comentario = sc.nextLine();
-                }
+                System.out.println("Por favor, ingrese un comentario para la actividad completada:");
+                comentario = sc.nextLine();
                 actividad.setComentario(comentario);
                 puntosAgregados = true;
             }

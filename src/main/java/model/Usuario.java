@@ -7,6 +7,7 @@ import java.util.Base64;
 
 
 public abstract class Usuario implements Serializable {
+    private static Usuario instance;
     protected String nombre;
     protected String usuario;
     protected String contrasena;
@@ -54,10 +55,26 @@ public abstract class Usuario implements Serializable {
         this.email = email;
     }
 
-    private String hashPassword(String password) {
+    public static Usuario getInstance() {
+        if (instance == null) {
+            instance = new Usuario() {
+                @Override
+                public String getRol() {
+                    return "";
+                }
+            };
+        }
+        return instance;
+    }
+
+    public static void setInstance(Usuario instance) {
+        Usuario.instance = instance;
+    }
+
+    private String hashPassword(String contrasena) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
+            byte[] hashedBytes = md.digest(contrasena.getBytes());
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error al hashear la contraseña", e);

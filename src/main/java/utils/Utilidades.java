@@ -3,6 +3,9 @@ package utils;
 import exceptions.ContraseñaInvalidaException;
 import exceptions.CorreoInvalidoException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Utilidades {
@@ -43,5 +46,45 @@ public class Utilidades {
         }
 
         return valido;
+    }
+
+    public static String pideString(String mensaje) {
+        Scanner scanner = new Scanner(System.in);
+        String cadena = "";
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                System.out.print(mensaje);
+                cadena = scanner.nextLine();
+                if (!cadena.isEmpty()) {
+                    valido = true;
+                } else {
+                    System.out.println("Error: No puedes introducir una cadena vacia.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: Ingresa una cadena válida.");
+            }
+        }
+        return cadena;
+    }
+
+    public static LocalDate pideFecha(String mensaje) {
+        Scanner scanner = new Scanner(System.in);
+        LocalDate fecha = null;
+        boolean valido = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        while (!valido) {
+            try {
+                System.out.print(mensaje);
+                String input = scanner.nextLine();
+                fecha = LocalDate.parse(input, formatter);
+                valido = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: Ingresa una fecha válida en el formato DD-MM-YYYY.");
+            }
+        }
+        return fecha;
     }
 }
