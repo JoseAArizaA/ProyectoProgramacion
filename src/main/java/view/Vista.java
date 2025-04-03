@@ -37,32 +37,6 @@ public class Vista {
         return opcion;
     }
 
-    public static Iniciativa pideDatosIniciativa() {
-        Iniciativa iniciativa = null;
-
-        Scanner teclado = new Scanner(System.in);
-        String nombre = Utilidades.pideString("Nombre de la iniciativa: ");
-        String descripcion = Utilidades.pideString("Descripcion de la iniciativa: ");
-        /*System.out.print("Creador de la iniciativa: ");
-        String creador = teclado.nextLine();
-        iniciativa = new Iniciativa(nombre, descripcion, new CreadorIniciativa(creador));
-        return iniciativa;*/
-    }
-
-    public static Actividad pideDatosActividad() {
-        Actividad actividad = null;
-
-        String nombre = Utilidades.pideString("Nombre de la actividad: ");
-        String descripcion = Utilidades.pideString("Descripcion de la actividad: ");
-        LocalDate fechaInicio = Utilidades.pideFecha("Fecha de inicio de la actividad (DD-MM-YYYY): ");
-        LocalDate fechaFin = Utilidades.pideFecha("Fecha de fin de la actividad (DD-MM-YYYY): ");
-        Voluntario voluntarioEncargado = null;
-        EstadoActividad estado = EstadoActividad.NoIniciada;
-        String comentario = "";
-
-        actividad = new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
-        return actividad;
-    }
 
     public static int mostrarMenuLogin() {
         System.out.println("Bienvenido al menu de login: ");
