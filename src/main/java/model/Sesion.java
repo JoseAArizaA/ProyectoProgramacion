@@ -46,7 +46,7 @@ public class Sesion{
     }
 
     /**
-     * Metodo que devuelve si la sesion esta activa
+     * Metodo que devuelve si la sesion está activa
      * @return: true si la sesion esta activa, false si no
      */
     public boolean estaActiva() {
