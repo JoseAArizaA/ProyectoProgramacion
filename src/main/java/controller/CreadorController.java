@@ -22,15 +22,12 @@ public class CreadorController {
         if (creador.agregarIniciativa(iniciativa)) {
             Vista.mostrarMensaje("Iniciativa creada con éxito.");
         } else {
-            System.out.println("Error al crear la iniciativa.");
+            Vista.mostrarMensaje("Error al crear la iniciativa.");
         }
     }
 
     /**
-     * Primero, solicita al usuario el nombre de la iniciativa que desea eliminar.
-     * Luego, busca la iniciativa en la lista de iniciativas creadas por el creador.
-     * Utiliza un flujo (stream) para filtrar las iniciativas y encontrar la que coincida
-     * con el nombre proporcionado. A continuación, intenta eliminar la iniciativa.
+     *
      */
     public void eliminarIniciativa() throws IniciativaNoExisteException {
         String nombre = Vista.pedirNombreIniciativa();
