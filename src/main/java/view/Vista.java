@@ -30,16 +30,10 @@ public class Vista {
         return opcion;
     }
 
-    public static Iniciativa pideDatosIniciativa() {
-        Iniciativa iniciativa = null;
-
-        Scanner teclado = new Scanner(System.in);
+    public static Iniciativa pideDatosIniciativa(CreadorIniciativa creador) {
         String nombre = Utilidades.pideString("Nombre de la iniciativa: ");
         String descripcion = Utilidades.pideString("Descripcion de la iniciativa: ");
-        /*System.out.print("Creador de la iniciativa: ");
-        String creador = teclado.nextLine();
-        iniciativa = new Iniciativa(nombre, descripcion, new CreadorIniciativa(creador));
-        return iniciativa;*/
+        return new Iniciativa(nombre, descripcion, creador);
     }
 
     public static Actividad pideDatosActividad() {
@@ -87,4 +81,14 @@ public class Vista {
         return contrasena;
     }
 
+    public static void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+
+    public static String pedirNombreIniciativa() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Nombre de la iniciativa: ");
+        String nombre = teclado.nextLine();
+        return nombre;
+    }
 }
