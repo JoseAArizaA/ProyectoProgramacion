@@ -1,17 +1,17 @@
 package view;
 
+import java.time.LocalDate;
 import model.*;
-import controller.ActividadController;
-import controller.IniciativaController;
-import controller.VoluntarioController;
+import controller.*;
 import exceptions.FechaNoValidaException;
 import exceptions.LimiteCaracteresException;
 import exceptions.NombreNoValidoException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 import static model.EstadoActividad.*;
 import static utils.Utilidades.*;
+
+import java.util.Scanner;
 
 public class Vista {
 
