@@ -23,6 +23,18 @@ public abstract class Usuario implements Serializable {
         this.email = email;
     }
 
+    public static Usuario getInstancia() {
+        if (instance == null) {
+            instance = new Usuario() {
+                @Override
+                public String getRol() {
+                    return "";
+                }
+            };
+        }
+        return instance;
+    }
+
     public Usuario() {
     }
 

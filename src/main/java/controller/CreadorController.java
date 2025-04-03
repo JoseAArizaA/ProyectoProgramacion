@@ -14,12 +14,12 @@ public class CreadorController {
     }
 
     public void crearIniciativa() {
-        /*Iniciativa iniciativa = Vista.pideDatosIniciativa();
+        Iniciativa iniciativa = Vista.pideDatosIniciativa();
         if (creador.crearIniciativa(iniciativa)) {
             System.out.println("Iniciativa creada con éxito.");
         } else {
             System.out.println("Error al crear la iniciativa.");
-        }*/
+        }
     }
 
     /**
