@@ -5,13 +5,9 @@ import exceptions.NombreNoValidoException;
 import model.Actividad;
 import model.EstadoActividad;
 import model.Voluntario;
-import view.Vista;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import static utils.Utilidades.leeCadena;
-import static utils.Utilidades.leeFecha;
-import static view.Vista.pideDatosActividad;
 
 public class ActividadController {
     private HashSet<Voluntario> voluntarios;

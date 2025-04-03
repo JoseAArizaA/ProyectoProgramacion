@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 
 public abstract class Usuario implements Serializable {
+    private static Usuario instance;
     protected String nombre;
     protected String usuario;
     protected String contrasena;
@@ -21,6 +22,18 @@ public abstract class Usuario implements Serializable {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.email = email;
+    }
+
+    public static Usuario getInstancia() {
+        if (instance == null) {
+            instance = new Usuario() {
+                @Override
+                public String getRol() {
+                    return "";
+                }
+            };
+        }
+        return instance;
     }
 
     public Usuario() {
