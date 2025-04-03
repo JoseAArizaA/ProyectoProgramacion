@@ -58,21 +58,28 @@ public class Iniciativa {
 
     public boolean eliminarActividad(String nombreActividad) {
         boolean eliminada = false;
-        for (int i = 0; i < actividades.size(); i++) {
-            if (actividades.get(i).getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
-                actividades.remove(i);
+        for (Actividad a : actividades) {
+            if (a.getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
+                actividades.remove(a);
                 eliminada = true;
+                break;
             }
         }
         return eliminada;
     }
 
-    public boolean modificarActividad(String nombreActividad, Actividad nuevaActividad) {
+    public boolean actualizarActividad(Actividad nuevaActividad) {
         boolean modificada = false;
-        for (int i = 0; i < actividades.size(); i++) {
-            if (actividades.get(i).getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
-                actividades.set(i, nuevaActividad);
+        for (Actividad a : actividades) {
+            if (a.getNombre().equalsIgnoreCase(nuevaActividad.getNombre())) {
+                a.setDescripcion(nuevaActividad.getDescripcion());
+                a.setFechaInicio(nuevaActividad.getFechaInicio());
+                a.setFechaFin(nuevaActividad.getFechaFin());
+                a.setVoluntarioEncargado(nuevaActividad.getVoluntarioEncargado());
+                a.setEstado(nuevaActividad.getEstado());
+                a.setComentario(nuevaActividad.getComentario());
                 modificada = true;
+                break;
             }
         }
         return modificada;

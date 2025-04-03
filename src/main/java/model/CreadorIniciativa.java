@@ -32,31 +32,51 @@ public class CreadorIniciativa extends Usuario {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
-    public boolean crearIniciativa(Iniciativa iniciativa) {
-        boolean creada = false;
-        if (iniciativa != null && !(iniciativasCreadas.contains(iniciativa))) {
+    /**
+     *
+     * @param iniciativa
+     * @return
+     */
+    public boolean agregarIniciativa(Iniciativa iniciativa) {
+        boolean agregada = false;
+        if (iniciativa != null && !iniciativasCreadas.contains(iniciativa)) {
             iniciativasCreadas.add(iniciativa);
-            creada = true;
+            agregada = true;
         }
-        return creada;
+        return agregada;
     }
 
-    public boolean eliminarIniciativa(Iniciativa iniciativa) {
+    /**
+     *
+     * @param nombreIniciativa
+     * @return
+     */
+    public boolean eliminarIniciativa(String nombreIniciativa) {
         boolean eliminada = false;
-        if (iniciativa!= null && iniciativasCreadas.contains(iniciativa)) {
-            iniciativasCreadas.remove(iniciativa);
-            eliminada = true;
+        for (Iniciativa iniciativa : iniciativasCreadas) {
+            if (iniciativa.getNombre().equalsIgnoreCase(nombreIniciativa)) {
+                iniciativasCreadas.remove(iniciativa);
+                eliminada = true;
+                break;
+            }
         }
         return eliminada;
     }
 
-    public boolean actualizarIniciativa(Iniciativa iniciativa, String nuevaIniciativa) {
+    /**
+     * Metodo que actualiza una iniciativa existente por otra nueva.
+     * @param nuevaIniciativa La iniciativa que se a actualizado.
+     * @return
+     */
+    public boolean actualizarIniciativa(Iniciativa nuevaIniciativa) {
         boolean actualizada = false;
-        if (iniciativa != null && iniciativasCreadas.contains(iniciativa)) {
-            iniciativa.setNombre(nuevaIniciativa);
-            iniciativa.setDescripcion(nuevaIniciativa);
-            iniciativa.setCreador(this);
-            actualizada = true;
+        for (Iniciativa iniciativa : iniciativasCreadas) {
+            if (iniciativa.getNombre().equalsIgnoreCase(nuevaIniciativa.getNombre())) {
+                iniciativa.setNombre(nuevaIniciativa.getNombre());
+                iniciativa.setDescripcion(nuevaIniciativa.getDescripcion());
+                actualizada = true;
+                break;
+            }
         }
         return actualizada;
     }
