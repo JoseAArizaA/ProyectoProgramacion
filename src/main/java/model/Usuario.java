@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.CorreoNoValidoException;
+import exceptions.CorreoInvalidoException;
 import exceptions.NombreNoValidoException;
 import exceptions.UsuarioNoValidoException;
 
@@ -60,9 +60,9 @@ public abstract class Usuario implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) throws CorreoNoValidoException {
+    public void setEmail(String email) throws CorreoInvalidoException {
         if(email == null || !email.matches(emailRegex)){
-            throw new CorreoNoValidoException("Debe introducir una dirección de correo electrónico válida.");
+            throw new CorreoInvalidoException("Debe introducir una dirección de correo electrónico válida.");
         }
         this.email = email;
     }
