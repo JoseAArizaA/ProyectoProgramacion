@@ -6,7 +6,6 @@ import exceptions.UsuarioNoValidoException;
 
 import java.io.Serializable;
 
-
 public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String usuario;
@@ -65,6 +64,16 @@ public abstract class Usuario implements Serializable {
             throw new CorreoNoValidoException("Debe introducir una dirección de correo electrónico válida.");
         }
         this.email = email;
+    }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al hashear la contraseña", e);
+        }
     }
 
     public abstract String getRol();

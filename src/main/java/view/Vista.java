@@ -39,6 +39,7 @@ public class Vista {
         int opcion = leeEntero("Selecciona una opción: ");
         return opcion;
     }
+
     public static int mostrarMenuLogin() {
         System.out.println("Bienvenido al menú de login: ");
         System.out.println("1. Iniciar sesión");
