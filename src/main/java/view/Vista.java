@@ -1,12 +1,12 @@
 package view;
 
+import model.*;
 import controller.ActividadController;
 import controller.IniciativaController;
 import controller.VoluntarioController;
 import exceptions.FechaNoValidaException;
 import exceptions.LimiteCaracteresException;
 import exceptions.NombreNoValidoException;
-import model.*;
 import utils.Utilidades;
 
 import java.time.LocalDate;
@@ -48,42 +48,11 @@ public class Vista {
         return opcion;
     }
 
-    public static Actividad pideDatosActividad() throws FechaNoValidaException, NombreNoValidoException, LimiteCaracteresException {
-        Scanner sc = new Scanner(System.in);
-
-        String nombre = validarNombre("Asigna un nombre para la actividad: ");
-        String descripcion = maximoCaracteresDescripcion("Descripción: ");
-        LocalDate  fechaInicio = leeFecha("Indique la fecha de inicio a continuación: ");
-        LocalDate fechaFin = leeFecha("Asigne la fecha de finalización prevista: ");
-        EstadoActividad estado = eligeEstado();
-        String comentario = maximoCaracteresComentario("Comentario: ");
-        leeCadena("Por último seleccione un encargado entre la lista de voluntarios: ");
-        VoluntarioController.muestraVoluntarios();
-        Voluntario voluntarioEncargado = VoluntarioController.obtenerVoluntario(sc.nextLine());
-
-        return new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
-    }
-
-    public static Iniciativa pideDatosIniciativa() throws NombreNoValidoException, LimiteCaracteresException {
-
-        String nombre = validarNombre("Elija un nombre para la iniciativa: ");
-        String descripcion = maximoCaracteresDescripcion("Descripción: ");
-        Utilidades.leeCadena("Creador de la iniciativa: ");
-        CreadorIniciativa creador = obtenerCreadorActual();
-
-        IniciativaController.iniciarIniciativa(nombre, descripcion, creador);
-        Actividad nuevaActividad = IniciativaController.agregarActividad("Seleccione la actividad que desea añadir: ");
-
-        IniciativaController.agregarActividadAIniciativa(nuevaActividad);
-
-        return new Iniciativa(nombre, descripcion, creador);
-    }
-
     public static int mostrarMenuEleccion(){
-        System.out.println("¿Cómo quiere iniciar sesión?");
+        System.out.println("Como quiere Iniciar Sesion: ");
         System.out.println("1. Creador");
         System.out.println("2. Voluntario");
-        int opcion = leeEntero("Selecciona una opción: ");
+        int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
         return opcion;
     }
 

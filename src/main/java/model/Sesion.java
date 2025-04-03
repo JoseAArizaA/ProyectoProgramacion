@@ -1,5 +1,8 @@
 package model;
-public class Sesion {
+
+import java.io.Serializable;
+
+public class Sesion{
         private static Sesion instancia;
         private Usuario usuarioActual;
 

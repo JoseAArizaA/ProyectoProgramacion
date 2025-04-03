@@ -1,10 +1,8 @@
 package controller;
 
-import exceptions.IniciativaIncorrectaException;
-import exceptions.NombreIniciativaIncorrectoException;
-import exceptions.NombreYDescripcionIniciativaIncorrectoException;
 import model.CreadorIniciativa;
 import model.Iniciativa;
+import view.Vista;
 
 import java.util.List;
 
@@ -15,30 +13,36 @@ public class CreadorController {
         this.creador = creador;
     }
 
-    public void crearIniciativa(String nombre, String descripcion) throws NombreIniciativaIncorrectoException {
-        try {
-            creador.crearIniciativa(nombre, descripcion);
+    public void crearIniciativa() {
+        Iniciativa iniciativa = Vista.pideDatosIniciativa();
+        if (creador.crearIniciativa(iniciativa)) {
             System.out.println("Iniciativa creada con éxito.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al crear la iniciativa: " + e.getMessage());
+        } else {
+            System.out.println("Error al crear la iniciativa.");
         }
     }
 
-    public void eliminarIniciativa(Iniciativa iniciativa) {
+    /**
+     * Primero, solicita al usuario el nombre de la iniciativa que desea eliminar.
+     * Luego, busca la iniciativa en la lista de iniciativas creadas por el creador.
+     * Utiliza un flujo (stream) para filtrar las iniciativas y encontrar la que coincida
+     * con el nombre proporcionado. A continuación, intenta eliminar la iniciativa.
+     */
+    public void eliminarIniciativa() {
+        String nombreIniciativa = Vista.pideNombreIniciativa();
+        Iniciativa iniciativa = creador.getIniciativasCreadas().stream()
+                .filter(i -> i.getNombre().equals(nombreIniciativa))
+                .findFirst()
+                .orElse(null);
         if (creador.eliminarIniciativa(iniciativa)) {
             System.out.println("Iniciativa eliminada con éxito.");
         } else {
-            System.out.println("No se encontró la iniciativa para eliminar.");
+            System.out.println("Error al eliminar la iniciativa.");
         }
     }
 
-    public void actualizarIniciativa(Iniciativa iniciativa, String nuevoNombre, String nuevaDescripcion) throws NombreYDescripcionIniciativaIncorrectoException, IniciativaIncorrectaException {
-        try {
-            creador.actualizarIniciativa(iniciativa, nuevoNombre, nuevaDescripcion);
-            System.out.println("Iniciativa actualizada con éxito.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al actualizar la iniciativa: " + e.getMessage());
-        }
+    public void actualizarIniciativa() {
+
     }
 
     public void listarIniciativas() {

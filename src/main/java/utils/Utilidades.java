@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Utilidades {
@@ -48,64 +51,46 @@ public class Utilidades {
         return valido;
     }
 
-    public static String leeCadena(String msn) {
-        Scanner sc = new Scanner(System.in);
+    public static String pideString(String mensaje) {
+        Scanner scanner = new Scanner(System.in);
         String cadena = "";
+        boolean valido = false;
 
-        do {
-            System.out.println(msn);
-            cadena = sc.nextLine();
-            if (cadena.isEmpty()) {
-                System.out.println("Error: Ingrese una cadena de texto válida.");
+        while (!valido) {
+            try {
+                System.out.print(mensaje);
+                cadena = scanner.nextLine();
+                if (!cadena.isEmpty()) {
+                    valido = true;
+                } else {
+                    System.out.println("Error: No puedes introducir una cadena vacia.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: Ingresa una cadena válida.");
             }
-        } while (cadena.isEmpty());
+        }
         return cadena;
     }
 
-    public static LocalDate leeFecha(String msn) throws FechaNoValidaException {
-        Scanner sc = new Scanner(System.in);
+    public static LocalDate pideFecha(String mensaje) {
+        Scanner scanner = new Scanner(System.in);
         LocalDate fecha = null;
+        boolean valido = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        while (fecha == null) {
-            System.out.println("Introduce una fecha en el siguiente formato: dd/MM/yyyy:");
-            String input = sc.nextLine();
+        while (!valido) {
             try {
-                fecha = LocalDate.parse(input);
+                System.out.print(mensaje);
+                String input = scanner.nextLine();
+                fecha = LocalDate.parse(input, formatter);
+                valido = true;
             } catch (DateTimeParseException e) {
-                throw new FechaNoValidaException("Error: la fecha no tiene el formato correcto.");
+                System.out.println("Error: Ingresa una fecha válida en el formato DD-MM-YYYY.");
             }
         }
         return fecha;
     }
-
-    public static String validarNombre(String msn) throws NombreNoValidoException {
-        Scanner sc = new Scanner(System.in);
-        String nombre = "";
-
-        System.out.println(msn);
-        nombre = sc.nextLine();
-        if (nombre.isEmpty()) {
-            throw new NombreNoValidoException("Error: El nombre no puede estar vacío.");
-        } else if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÄËÏÖÜäëïöüÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÑñ\\-\\s]+$")) {
-            throw new NombreNoValidoException("Error: El nombre solo puede contener letras, espacios y guiones.");
-        }
-        return nombre;
-    }
-    public static String maximoCaracteresDescripcion(String msn) throws LimiteCaracteresException {
-        Scanner sc = new Scanner(System.in);
-        String descripcion = "";
-
-        do {
-            System.out.println(msn);
-            descripcion = sc.nextLine();
-            if (descripcion.isEmpty()) {
-                System.out.println("Error: No puede dejar este campo sin rellenar.");
-            } else if (descripcion.length() > 1000) {
-                throw new LimiteCaracteresException("La descripción no puede tener más de 1000 caracteres.");
-            }
-        } while (descripcion.isEmpty());
+}
 
         return descripcion;
     }
