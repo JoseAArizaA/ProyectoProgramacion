@@ -17,6 +17,7 @@ public class Vista {
         System.out.println("5. Cerrar sesión");
         int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
         return opcion;
+
     }
 
     public static int mostrarMenuCreador() {
