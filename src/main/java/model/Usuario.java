@@ -1,5 +1,9 @@
 package model;
 
+import exceptions.CorreoInvalidoException;
+import exceptions.NombreNoValidoException;
+import exceptions.UsuarioNoValidoException;
+
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +30,18 @@ public abstract class Usuario implements Serializable {
     /**
      * Constructor por defecto
      */
+    public static Usuario getInstancia() {
+        if (instance == null) {
+            instance = new Usuario() {
+                @Override
+                public String getRol() {
+                    return "";
+                }
+            };
+        }
+        return instance;
+    }
+
     public Usuario() {
     }
 
