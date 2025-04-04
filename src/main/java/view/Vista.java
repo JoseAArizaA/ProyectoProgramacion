@@ -1,16 +1,9 @@
 package view;
 
-import controller.ActividadController;
-import controller.IniciativaController;
-import controller.VoluntarioController;
-import exceptions.FechaNoValidaException;
-import exceptions.LimiteCaracteresException;
-import exceptions.NombreNoValidoException;
 import model.*;
 import utils.Utilidades;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static model.EstadoActividad.*;
@@ -100,21 +93,14 @@ public class Vista {
         return contrasena;
     }
 
-    public static String pedirNombreIniciativa() {
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Nombre de la iniciativa: ");
-        String nombreIniciativa = teclado.nextLine();
-        return nombreIniciativa;
-    }
-
     public static EstadoActividad eligeEstado(){
         Scanner sc = new Scanner(System.in);
 
-        pideString("Seleccione el índice correspondiente al estado de la actividad: ");
-        pideString("1. No iniciada");
-        pideString("2. En curso");
-        pideString("3. Finalizada");
-        int opcion = sc.nextInt();
+        System.out.println("Seleccione el índice correspondiente al estado de la actividad: ");
+        System.out.println("1. No iniciada");
+        System.out.println("2. En curso");
+        System.out.println("3. Finalizada");
+        int opcion = Utilidades.leeEntero("Selecciona una opción: ");
 
         EstadoActividad estado;
 
@@ -136,15 +122,10 @@ public class Vista {
         return estado;
     }
 
-    public static CreadorIniciativa obtenerCreadorActual() {
-        Usuario usuarioActual = Sesion.getInstancia().getUsuarioActual();
-        return new CreadorIniciativa(usuarioActual.getNombre(), usuarioActual.getUsuario(), usuarioActual.getContrasena(), usuarioActual.getEmail(), usuarioActual.getRol());
-    }
-
     public static String pedirNombreIniciativa() {
-        Scanner teclado = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("Nombre de la iniciativa: ");
-        String nombre = teclado.nextLine();
+        String nombre = sc.nextLine();
         return nombre;
     }
 }

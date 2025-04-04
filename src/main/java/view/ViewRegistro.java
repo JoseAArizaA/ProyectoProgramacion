@@ -32,7 +32,7 @@ public class ViewRegistro {
             contrasena = scanner.nextLine();
             contrasenaValida = true;
             try{
-                Utilidades.validarContraseña(contrasena);
+                Utilidades.validarContrasenna(contrasena);
             } catch (ContrasennaInvalidaException e){
                 System.out.println(e.getMessage());
                 contrasenaValida = false;
