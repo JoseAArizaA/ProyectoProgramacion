@@ -1,16 +1,26 @@
 package view;
 
+import controller.ActividadController;
+import controller.IniciativaController;
+import controller.VoluntarioController;
+import exceptions.FechaNoValidaException;
+import exceptions.LimiteCaracteresException;
+import exceptions.NombreNoValidoException;
 import model.*;
 import utils.Utilidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static model.EstadoActividad.*;
+import static utils.Utilidades.*;
 
 public class Vista {
 
     public static int mostrarMenuVoluntario() {
-        System.out.println("Bienvenido al menu de voluntario: ");
-        System.out.println("1. Unirse a actividad/es");
+        System.out.println("Bienvenido al menú de voluntario: ");
+        System.out.println("1. Solicitar actividad/es para unirse");
         System.out.println("2. Ver actividades en las que participo");
         System.out.println("3. Asignar estado a una actividad");
         System.out.println("4. Ver puntos");
@@ -21,7 +31,7 @@ public class Vista {
     }
 
     public static int mostrarMenuCreador() {
-        System.out.println("Bienvenido al menu de creador: ");
+        System.out.println("Bienvenido al menú de creador: ");
         System.out.println("1. Crear iniciativa");
         System.out.println("2. Eliminar iniciativa");
         System.out.println("3. Actualizar iniciativa");
@@ -57,19 +67,23 @@ public class Vista {
     }
 
     public static int mostrarMenuLogin() {
-        System.out.println("Bienvenido al menu de login: ");
+        System.out.println("Bienvenido al menú de login: ");
         System.out.println("1. Iniciar sesión");
         System.out.println("2.Registrarse");
-        int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
+        int opcion = leeEntero("Selecciona una opción: ");
         return opcion;
     }
 
     public static int mostrarMenuEleccion(){
-        System.out.println("Como quiere Iniciar Sesion: ");
+        System.out.println("¿Cómo quiere iniciar sesión?");
         System.out.println("1. Creador");
         System.out.println("2. Voluntario");
-        int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
+        int opcion = leeEntero("Selecciona una opción: ");
         return opcion;
+    }
+
+    public static void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
     }
 
     public static String pedirUsuario() {
@@ -86,8 +100,45 @@ public class Vista {
         return contrasena;
     }
 
-    public static void mostrarMensaje(String mensaje) {
-        System.out.println(mensaje);
+    public static String pedirNombreIniciativa() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Nombre de la iniciativa: ");
+        String nombreIniciativa = teclado.nextLine();
+        return nombreIniciativa;
+    }
+
+    public static EstadoActividad eligeEstado(){
+        Scanner sc = new Scanner(System.in);
+
+        pideString("Seleccione el índice correspondiente al estado de la actividad: ");
+        pideString("1. No iniciada");
+        pideString("2. En curso");
+        pideString("3. Finalizada");
+        int opcion = sc.nextInt();
+
+        EstadoActividad estado;
+
+        switch (opcion) {
+            case 1:
+                estado = NoIniciada;
+                break;
+            case 2:
+                estado = EnProgreso;
+                break;
+            case 3:
+                estado = Completada;
+                break;
+            default:
+                pideString("Opción no válida. Seleccionando estado por defecto: No iniciada");
+                estado = NoIniciada;
+        }
+
+        return estado;
+    }
+
+    public static CreadorIniciativa obtenerCreadorActual() {
+        Usuario usuarioActual = Sesion.getInstancia().getUsuarioActual();
+        return new CreadorIniciativa(usuarioActual.getNombre(), usuarioActual.getUsuario(), usuarioActual.getContrasena(), usuarioActual.getEmail(), usuarioActual.getRol());
     }
 
     public static String pedirNombreIniciativa() {
