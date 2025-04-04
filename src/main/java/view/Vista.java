@@ -1,9 +1,6 @@
 package view;
 
-import model.Actividad;
-import model.EstadoActividad;
-import model.Iniciativa;
-import model.Voluntario;
+import model.*;
 import utils.Utilidades;
 
 import java.time.LocalDate;
@@ -13,7 +10,7 @@ public class Vista {
 
     public static int mostrarMenuVoluntario() {
         System.out.println("Bienvenido al menu de voluntario: ");
-        System.out.println("1. Solizitar actividad/es para unirse");
+        System.out.println("1. Unirse a actividad/es");
         System.out.println("2. Ver actividades en las que participo");
         System.out.println("3. Asignar estado a una actividad");
         System.out.println("4. Ver puntos");
@@ -26,24 +23,21 @@ public class Vista {
         System.out.println("Bienvenido al menu de creador: ");
         System.out.println("1. Crear iniciativa");
         System.out.println("2. Eliminar iniciativa");
-        System.out.println("3. Gestionar iniciativa");
-        System.out.println("4. Asignar iniciativa");
-        System.out.println("5. Cerrar sesión");
+        System.out.println("3. Actualizar iniciativa");
+        System.out.println("4. Listar iniciativas creadas por mi");
+        System.out.println("5. Crear actividad");
+        System.out.println("6. Eliminar actividad");
+        System.out.println("7. Actualizar actividad");
+        System.out.println("8. Listar actividades");
+        System.out.println("9. Cerrar sesión");
         int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
         return opcion;
     }
 
-    public static Iniciativa pideDatosIniciativa() {
-        Iniciativa iniciativa = null;
-
-        Scanner teclado = new Scanner(System.in);
+    public static Iniciativa pideDatosIniciativa(CreadorIniciativa creador) {
         String nombre = Utilidades.pideString("Nombre de la iniciativa: ");
         String descripcion = Utilidades.pideString("Descripcion de la iniciativa: ");
-        /*System.out.print("Creador de la iniciativa: ");
-        String creador = teclado.nextLine();
-        iniciativa = new Iniciativa(nombre, descripcion, new CreadorIniciativa(creador));
-        return iniciativa;*/
-        return null;
+        return new Iniciativa(nombre, descripcion, creador);
     }
 
     public static Actividad pideDatosActividad() {
@@ -91,4 +85,14 @@ public class Vista {
         return contrasena;
     }
 
+    public static void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+
+    public static String pedirNombreIniciativa() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Nombre de la iniciativa: ");
+        String nombre = teclado.nextLine();
+        return nombre;
+    }
 }

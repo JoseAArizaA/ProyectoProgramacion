@@ -36,7 +36,7 @@ public class Voluntario extends Usuario implements Serializable {
     }
 
     public void agregarPuntos(int puntos) {
-        if (puntos > 0) {
+        if (puntos >= 0) {
             this.puntos += puntos;
         }
     }
