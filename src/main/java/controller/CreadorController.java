@@ -56,11 +56,11 @@ public class CreadorController {
     public void listarIniciativas() {
         List<Iniciativa> iniciativas = creador.getIniciativasCreadas();
         if (iniciativas.isEmpty()) {
-            System.out.println("No hay iniciativas creadas.");
+            Vista.mostrarMensaje("No hay iniciativas creadas.");
         } else {
-            System.out.println("Iniciativas creadas por " + creador.getNombre() + ":");
-            for (Iniciativa i : iniciativas) {
-                System.out.println("- " + i.getNombre() + ": " + i.getDescripcion());
+            Vista.mostrarMensaje("Iniciativas creadas por " + creador.getNombre() + ":");
+            for (Iniciativa iniciativa : iniciativas) {
+                Vista.mostrarMensaje(iniciativa.toString());
             }
         }
     }

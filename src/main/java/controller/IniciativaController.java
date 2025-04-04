@@ -1,6 +1,7 @@
 package controller;
 
 
+import exceptions.ActividadNoExisteException;
 import model.Actividad;
 import model.Iniciativa;
 import utils.Utilidades;
@@ -27,7 +28,7 @@ public class IniciativaController {
         if (iniciativa.eliminarActividad(nombre)) {
             Vista.mostrarMensaje("Actividad eliminada con éxito.");
         } else {
-            Vista.mostrarMensaje("Error al eliminar la actividad.");
+            throw new ActividadNoExisteException("La actividad con nombre: " + nombre + " no existe.");
         }
     }
 
@@ -37,6 +38,17 @@ public class IniciativaController {
             Vista.mostrarMensaje("Actividad actualizada con éxito.");
         } else {
             Vista.mostrarMensaje("Error al actualizar la actividad.");
+        }
+    }
+
+    public void listarActividades() {
+        if (iniciativa.getActividades().isEmpty()) {
+            Vista.mostrarMensaje("No hay actividades creadas.");
+        } else {
+            Vista.mostrarMensaje("Actividades de la iniciativa: " + iniciativa.getNombre());
+            for (Actividad actividad : iniciativa.getActividades()) {
+                Vista.mostrarMensaje(actividad.toString());
+            }
         }
     }
 }

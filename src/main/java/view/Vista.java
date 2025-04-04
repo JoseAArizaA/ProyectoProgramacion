@@ -10,7 +10,7 @@ public class Vista {
 
     public static int mostrarMenuVoluntario() {
         System.out.println("Bienvenido al menu de voluntario: ");
-        System.out.println("1. Solizitar actividad/es para unirse");
+        System.out.println("1. Unirse a actividad/es");
         System.out.println("2. Ver actividades en las que participo");
         System.out.println("3. Asignar estado a una actividad");
         System.out.println("4. Ver puntos");
@@ -23,9 +23,13 @@ public class Vista {
         System.out.println("Bienvenido al menu de creador: ");
         System.out.println("1. Crear iniciativa");
         System.out.println("2. Eliminar iniciativa");
-        System.out.println("3. Gestionar iniciativa");
-        System.out.println("4. Asignar iniciativa");
-        System.out.println("5. Cerrar sesión");
+        System.out.println("3. Actualizar iniciativa");
+        System.out.println("4. Listar iniciativas creadas por mi");
+        System.out.println("5. Crear actividad");
+        System.out.println("6. Eliminar actividad");
+        System.out.println("7. Actualizar actividad");
+        System.out.println("8. Listar actividades");
+        System.out.println("9. Cerrar sesión");
         int opcion = Utilidades.leeEntero("Selecciona una opcion: ");
         return opcion;
     }
