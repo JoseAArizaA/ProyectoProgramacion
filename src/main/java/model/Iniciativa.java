@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +7,12 @@ public class Iniciativa {
     private String nombre;
     private String descripcion;
     private CreadorIniciativa creador;
-    private List<Actividad> actividades;
+    private ArrayList<Actividad> actividades;
 
     public Iniciativa(String nombre, String descripcion, CreadorIniciativa creador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.creador = creador;
-        this.actividades = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -45,24 +43,46 @@ public class Iniciativa {
         return actividades;
     }
 
-    public void setActividades(List<Actividad> actividades) {
+    public void setActividades(ArrayList<Actividad> actividades) {
         this.actividades = actividades;
     }
 
-    public void agregarActividad(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Voluntario voluntarioEncargado, EstadoActividad estado, String comentario) {
-        Actividad actividad = new Actividad(nombre, descripcion, fechaInicio, fechaFin, voluntarioEncargado, estado, comentario);
-        this.actividades.add(actividad);
-    }
-
-    public void eliminarActividad(Actividad actividad) {
-        this.actividades.remove(actividad);
-    }
-
-    public void modificarActividad(Actividad actividad, Actividad nuevaActividad) {
-        int index = this.actividades.indexOf(actividad);
-        if (index!= -1) {
-            this.actividades.set(index, nuevaActividad);
+    public boolean agregarActividad(Actividad actividad) {
+        boolean agregada = false;
+        if (actividad != null && !(actividades.contains(actividad))) {
+            actividades.add(actividad);
+            agregada = true;
         }
+        return agregada;
+    }
+
+    public boolean eliminarActividad(String nombreActividad) {
+        boolean eliminada = false;
+        for (Actividad a : actividades) {
+            if (a.getNombre().equalsIgnoreCase(nombreActividad) && actividades != null) {
+                actividades.remove(a);
+                eliminada = true;
+                break;
+            }
+        }
+        return eliminada;
+    }
+
+    public boolean actualizarActividad(Actividad nuevaActividad) {
+        boolean modificada = false;
+        for (Actividad a : actividades) {
+            if (a.getNombre().equalsIgnoreCase(nuevaActividad.getNombre())) {
+                a.setDescripcion(nuevaActividad.getDescripcion());
+                a.setFechaInicio(nuevaActividad.getFechaInicio());
+                a.setFechaFin(nuevaActividad.getFechaFin());
+                a.setVoluntarioEncargado(nuevaActividad.getVoluntarioEncargado());
+                a.setEstado(nuevaActividad.getEstado());
+                a.setComentario(nuevaActividad.getComentario());
+                modificada = true;
+                break;
+            }
+        }
+        return modificada;
     }
 
     @Override
