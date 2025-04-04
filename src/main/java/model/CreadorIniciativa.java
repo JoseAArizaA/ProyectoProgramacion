@@ -7,35 +7,53 @@ public class CreadorIniciativa extends Usuario {
     private String Ong;
     private List<Iniciativa> iniciativasCreadas;
 
+    /**
+     * Constructor fullEquip
+     **/
     public CreadorIniciativa(String nombre, String usuario, String contrasena, String email, String ong) {
         super(nombre, usuario, contrasena, email);
         this.Ong = ong;
         this.iniciativasCreadas = new ArrayList<>();
     }
 
+    /**
+     * Constructor por defecto
+     **/
     public CreadorIniciativa() {
     }
 
+    /**
+     * Método GET para Ong
+     **/
     public String getOng() {
         return Ong;
     }
 
+    /**
+     * Método SET para Ong
+     **/
     public void setOng(String ong) {
         Ong = ong;
     }
 
+    /**
+     * Método GET para iniciativasCreadas
+     **/
     public List<Iniciativa> getIniciativasCreadas() {
         return iniciativasCreadas;
     }
 
+    /**
+     * Método SET para iniciativasCreadas
+     **/
     public void setIniciativasCreadas(List<Iniciativa> iniciativasCreadas) {
         this.iniciativasCreadas = iniciativasCreadas;
     }
 
     /**
-     *
-     * @param iniciativa
-     * @return
+     *Metodo que agrega una iniciativa a la lista de iniciativas creadas.
+     * @param iniciativa:Iniciativa que se va a agregar.
+     * @return: true si se agrega la iniciativa, false si no se agrega.
      */
     public boolean agregarIniciativa(Iniciativa iniciativa) {
         boolean agregada = false;
@@ -47,9 +65,9 @@ public class CreadorIniciativa extends Usuario {
     }
 
     /**
-     *
-     * @param nombreIniciativa
-     * @return
+     * Metodo que elimina una iniciativa de la lista de iniciativas creadas.
+     * @param nombreIniciativa: Iniciativa que se va a eliminar.
+     * @return: true si se elimina la iniciativa, false si no se elimina.
      */
     public boolean eliminarIniciativa(String nombreIniciativa) {
         boolean eliminada = false;
@@ -81,11 +99,18 @@ public class CreadorIniciativa extends Usuario {
         return actualizada;
     }
 
+    /**
+     * Metodo que devuelve el rol del usuario.
+     * @return: String con el rol del usuario.
+     */
     @Override
     public String getRol() {
         return "Creador";
     }
 
+    /**
+     * Metodo toString
+     */
     @Override
     public String toString() {
         return "Nombre: " + nombre + " Usuario: " + usuario;

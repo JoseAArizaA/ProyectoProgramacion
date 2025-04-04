@@ -9,14 +9,18 @@ import java.util.List;
 
 
 public class VoluntarioController {
-
-
             private List<Voluntario> voluntarios;
 
-            public VoluntarioController(List<Voluntario> voluntarios) {
+    /**
+     *Construtor fullEquip
+     */
+    public VoluntarioController(List<Voluntario> voluntarios) {
                 this.voluntarios = voluntarios;
             }
 
+            /**
+             * Método para agregar un voluntario a la lista de voluntarios
+             */
             public void agregarVoluntario(Voluntario voluntario) {
                 if (!voluntarios.contains(voluntario)) {
                     voluntarios.add(voluntario);
@@ -26,6 +30,9 @@ public class VoluntarioController {
                 }
             }
 
+            /**
+             * Método para buscar un voluntario por su nombre de usuario
+             */
             public Voluntario buscarVoluntarioPorUsuario(String usuario) {
                 for (Voluntario v : voluntarios) {
                     if (v.getUsuario().equals(usuario)) {
@@ -36,6 +43,9 @@ public class VoluntarioController {
                 return null;
             }
 
+            /**
+             * Método para asignar una actividad a un voluntario
+             */
             public void asignarActividadAVoluntario(String usuario, Actividad actividad) {
                 Voluntario voluntario = buscarVoluntarioPorUsuario(usuario);
                 if (voluntario != null) {
@@ -43,6 +53,9 @@ public class VoluntarioController {
                 }
             }
 
+            /**
+             * Método para actualizar los puntos de un voluntario
+             */
             public void actualizarPuntos(String usuario, int puntos) {
                 Voluntario voluntario = buscarVoluntarioPorUsuario(usuario);
                 if (voluntario != null) {
@@ -51,6 +64,9 @@ public class VoluntarioController {
                 }
             }
 
+            /**
+             * Método para listar voluntarios
+             */
             public void listarVoluntarios() {
                 for (Voluntario v : voluntarios) {
                     System.out.println("Voluntario: " + v.getNombre() + " - Usuario: " + v.getUsuario() + " - Puntos: " + v.getPuntos());

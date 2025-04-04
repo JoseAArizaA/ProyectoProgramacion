@@ -68,7 +68,9 @@ public class IniciativaController {
 
 
 
-
+    /**
+     *Metodo para agregar una actividad a la iniciativa
+     */
     public void agregarActividad() {
         Actividad actividad = Vista.pideDatosActividad();
         if (iniciativa.agregarActividad(actividad)) {
@@ -78,6 +80,9 @@ public class IniciativaController {
         }
     }
 
+    /**
+     * Método para eliminar una actividad de la iniciativa
+     */
     public void eliminarActividad() {
         String nombre = Utilidades.pideString("Nombre de la actividad a eliminar: ");
         if (iniciativa.eliminarActividad(nombre)) {
@@ -87,6 +92,9 @@ public class IniciativaController {
         }
     }
 
+    /**
+     * Método para actualizar una actividad de la iniciativa
+     */
     public void actualizarActividad() {
         Actividad actividad = Vista.pideDatosActividad();
         if (iniciativa.actualizarActividad(actividad)) {
@@ -96,6 +104,9 @@ public class IniciativaController {
         }
     }
 
+    /**
+     * Método para listar las actividades de la iniciativa
+     */
     public void listarActividades() {
         if (iniciativa.getActividades().isEmpty()) {
             Vista.mostrarMensaje("No hay actividades creadas.");

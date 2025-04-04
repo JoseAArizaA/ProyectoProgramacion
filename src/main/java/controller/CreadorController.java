@@ -15,7 +15,7 @@ public class CreadorController {
     }
 
     /**
-     *
+     *Metodo para agregar una iniciativa
      */
     public void agregarIniciativa() {
         Iniciativa iniciativa = Vista.pideDatosIniciativa(creador);
@@ -27,7 +27,7 @@ public class CreadorController {
     }
 
     /**
-     *
+     *Metodo para eliminar una iniciativa
      */
     public void eliminarIniciativa() throws IniciativaNoExisteException {
         String nombre = Vista.pedirNombreIniciativa();
@@ -39,7 +39,7 @@ public class CreadorController {
     }
 
     /**
-     *
+     *Metodo para actualizar una iniciativa
      */
     public void actualizarIniciativa() {
         Iniciativa iniciativa = Vista.pideDatosIniciativa(creador);
@@ -51,7 +51,7 @@ public class CreadorController {
     }
 
     /**
-     *
+     *Metodo para listar las iniciativas
      */
     public void listarIniciativas() {
         List<Iniciativa> iniciativas = creador.getIniciativasCreadas();
