@@ -5,6 +5,9 @@ import exceptions.NombreNoValidoException;
 import exceptions.UsuarioNoValidoException;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public abstract class Usuario implements Serializable {
     private static Usuario instance;
@@ -12,9 +15,6 @@ public abstract class Usuario implements Serializable {
     protected String usuario;
     protected String contrasena;
     protected String email;
-    protected String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
-    protected String nombreRegex = "^[A-Za-zÁÉÍÓÚáéíóúÄËÏÖÜäëïöüÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÑñ]";
-    protected String usuarioRegex = "^[A-Za-z0-9]{3,20}";
 
     public Usuario(String nombre, String usuario, String contrasena, String email) {
         this.nombre = nombre;

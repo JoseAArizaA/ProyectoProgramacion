@@ -16,10 +16,63 @@ import utils.Utilidades;
 
 import static view.Vista.pideDatosActividad;
 
-public class   ActividadController {
+public class ActividadController {
     private HashSet<Voluntario> voluntarios;
-    private ArrayList<Actividad> actividades;
+    private static ArrayList<Actividad> actividades;
     private Voluntario encargado;
+    private static final String ARCHIVO_ACTIVIDADES = "actividades.xml";
+
+    /**
+     * Método para guardar las actividades en un archivo XML
+     * @param actividades
+     * @param archivoActividades
+     */
+    public static void guardarActividades(HashSet<Actividad> actividades, String archivoActividades) {
+        HashSetContenedor<Actividad> listaActividades = new HashSetContenedor<>(actividades);
+        XMLManager.writeXML(listaActividades, archivoActividades);
+    }
+
+    /**
+     * Método para cargar las actividades desde un archivo XML
+     */
+    public static void cargarActividades() {
+        File archivo = new File("actividades.xml");
+        boolean archivoExiste = archivo.exists();
+
+        if (!archivoExiste) {
+            guardarActividades(new HashSet<>(), "actividades.xml");
+        }
+
+        if (archivoExiste) {
+            HashSetContenedor<Actividad> lecturaActividades = new HashSetContenedor<>(new HashSet<>());
+            HashSetContenedor<Actividad> leeActividades = XMLManager.readXML(lecturaActividades, "actividades.xml");
+            if (leeActividades != null && leeActividades.getSet() != null) {
+                actividades = new ArrayList<>(leeActividades.getSet());
+            }
+        }
+    }
+
+
+    /**
+     * Método para agregar una actividad a la lista de actividades
+     * @param actividad
+     */
+    public void agregarActividad(Actividad actividad) {
+        actividades.add(actividad);
+        guardarActividades(new HashSet<>(actividades), ARCHIVO_ACTIVIDADES);
+    }
+
+    /**
+     * Método para crear una actividad, y guardarla en el archivo XML
+     * @return: Actividad creada
+     * @throws FechaNoValidaException
+     * @throws NombreNoValidoException
+     */
+    public Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
+        Actividad nuevaActividad = pideDatosActividad();
+        agregarActividad(nuevaActividad);
+        return nuevaActividad;
+    }
     private static final String ARCHIVO_ACTIVIDADES = "actividades.xml";
 
     /**
@@ -81,12 +134,22 @@ public class   ActividadController {
      * @param actividades
      * @param encargado
      */
+
+    /**
+     * Constructor de la clase ActividadController
+     * @param voluntarios
+     * @param actividades
+     * @param encargado
+     */
     public ActividadController(HashSet<Voluntario> voluntarios, ArrayList<Actividad> actividades, Voluntario encargado) {
         this.voluntarios = voluntarios;
         this.actividades = actividades;
         this.encargado = encargado;
     }
 
+    public Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
+        return pideDatosActividad();
+    }
 
     /**
      * Método para modificar una actividad
