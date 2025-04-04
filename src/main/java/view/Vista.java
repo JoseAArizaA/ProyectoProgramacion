@@ -105,10 +105,10 @@ public class Vista {
     public static EstadoActividad eligeEstado(){
         Scanner sc = new Scanner(System.in);
 
-        leeCadena("Seleccione el índice correspondiente al estado de la actividad: ");
-        leeCadena("1. No iniciada");
-        leeCadena("2. En curso");
-        leeCadena("3. Finalizada");
+        pideString("Seleccione el índice correspondiente al estado de la actividad: ");
+        pideString("1. No iniciada");
+        pideString("2. En curso");
+        pideString("3. Finalizada");
         int opcion = sc.nextInt();
 
         EstadoActividad estado;
