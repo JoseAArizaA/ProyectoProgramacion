@@ -124,7 +124,7 @@ public class Vista {
                 estado = Completada;
                 break;
             default:
-                leeCadena("Opción no válida. Seleccionando estado por defecto: No iniciada");
+                pideString("Opción no válida. Seleccionando estado por defecto: No iniciada");
                 estado = NoIniciada;
         }
 
