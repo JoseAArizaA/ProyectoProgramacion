@@ -2,7 +2,7 @@ package utils;
 
 import exceptions.ContrasennaInvalidaException;
 import exceptions.CorreoInvalidoException;
-import exceptions.LimiteCaracteresException;
+import exceptions.NombreNoValidoException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -102,38 +102,5 @@ public class Utilidades {
             throw new NombreNoValidoException("Error: El nombre solo puede contener letras, espacios y guiones.");
         }
         return nombre;
-    }
-    public static String maximoCaracteresDescripcion(String msn) throws LimiteCaracteresException {
-        Scanner sc = new Scanner(System.in);
-        String descripcion = "";
-
-        do {
-            System.out.println(msn);
-            descripcion = sc.nextLine();
-            if (descripcion.isEmpty()) {
-                System.out.println("Error: No puede dejar este campo sin rellenar.");
-            } else if (descripcion.length() > 1000) {
-                throw new LimiteCaracteresException("La descripción no puede tener más de 1000 caracteres.");
-            }
-        } while (descripcion.isEmpty());
-
-        return descripcion;
-    }
-
-    public static String maximoCaracteresComentario(String msn) throws LimiteCaracteresException {
-        Scanner sc = new Scanner(System.in);
-        String comentario = "";
-
-        do {
-            System.out.println(msn);
-            comentario = sc.nextLine();
-            if (comentario.isEmpty()) {
-                System.out.println("Error: No puede dejar este campo sin rellenar.");
-            } else if (comentario.length() > 500) {
-                throw new LimiteCaracteresException("El límite de caracteres por comentario es de 500.");
-            }
-        } while (comentario.isEmpty());
-
-        return comentario;
     }
 }
