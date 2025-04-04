@@ -2,9 +2,10 @@ package controller;
 
 
 import exceptions.ActividadNoExisteException;
+import exceptions.FechaNoValidaException;
+import exceptions.NombreNoValidoException;
 import model.Actividad;
 import model.Iniciativa;
-import model.Voluntario;
 import utils.HashSetContenedor;
 import utils.Utilidades;
 import utils.XMLManager;
@@ -13,61 +14,69 @@ import view.Vista;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
+import static view.Vista.pideDatosActividad;
 
 public class IniciativaController {
     private Iniciativa iniciativa;
     private HashSet<Iniciativa> iniciativas;
-    private static final String ARCHIVO_INICIATIVAS = "iniciativas.xml";
+    private HashSet<Actividad> actividades = new HashSet<>();
+    static final String ARCHIVO_INICIATIVAS = "iniciativas.xml";
+    static final String ARCHIVO_ACTIVIDADES = "actividades.xml";
 
     public IniciativaController(Iniciativa iniciativa) {
         this.iniciativa = iniciativa;
     }
 
-
     /**
-     * Método para guardar las iniciativas en un archivo XML
-     * @param iniciativas: Conjunto de iniciativas a guardar
-     * @param archivoIniciativas: Nombre del archivo XML
+     * Método para guardar las actividades en un archivo XML
+     * @param actividades
+     * @param archivoActividades
      */
-    public static void guardarIniciativas(HashSet<Iniciativa> iniciativas, String archivoIniciativas) {
-        HashSetContenedor<Iniciativa> listaIniciativas = new HashSetContenedor<>(iniciativas);
-        XMLManager.writeXML(listaIniciativas, archivoIniciativas);
+    public static void guardarActividades(HashSet<Actividad> actividades, String archivoActividades) {
+        HashSetContenedor<Actividad> listaActividades = new HashSetContenedor<>(actividades);
+        XMLManager.writeXML(listaActividades, archivoActividades);
     }
 
     /**
-     * Método para cargar las iniciativas desde un archivo XML
-     * @param archivoIniciativas: Nombre del archivo XML
-     * @return Lista de iniciativas cargadas
+     * Método para cargar las actividades desde un archivo XML
      */
-    public static ArrayList<Iniciativa> cargarIniciativas(String archivoIniciativas) {
-        File archivo = new File(archivoIniciativas);
+    public static void cargarActividades() {
+        File archivo = new File("actividades.xml");
         boolean archivoExiste = archivo.exists();
 
         if (!archivoExiste) {
-            guardarIniciativas(new HashSet<>(), archivoIniciativas);
+            guardarActividades(new HashSet<>(), "actividades.xml");
         }
 
         if (archivoExiste) {
-            HashSetContenedor<Iniciativa> lecturaIniciativas = new HashSetContenedor<>(new HashSet<>());
-            HashSetContenedor<Iniciativa> leeIniciativas = XMLManager.readXML(lecturaIniciativas, archivoIniciativas);
-            if (leeIniciativas != null && leeIniciativas.getSet() != null) {
-                return new ArrayList<>(leeIniciativas.getSet());
+            HashSetContenedor<Actividad> lecturaActividades = new HashSetContenedor<>(new HashSet<>());
+            HashSetContenedor<Actividad> leeActividades = XMLManager.readXML(lecturaActividades, "actividades.xml");
+            if (leeActividades != null && leeActividades.getSet() != null) {
+                ArrayList<Actividad> actividades = new ArrayList<>(leeActividades.getSet());
             }
         }
-        return new ArrayList<>();
     }
 
     /**
-     * Método para agregar una iniciativa a la lista de iniciativas y guardarla en el archivo XML
-     * @param nuevaIniciativa: Iniciativa a agregar
+     * Método para agregar una actividad a la lista de actividades
+     * @param actividad
      */
-    public void agregarIniciativa(Iniciativa nuevaIniciativa) {
-        iniciativas.add(nuevaIniciativa);
-        guardarIniciativas(iniciativas, ARCHIVO_INICIATIVAS);
+    public void agregarActividad(Actividad actividad) {
+        actividades.add(actividad);
+        guardarActividades(new HashSet<>(actividades), ARCHIVO_ACTIVIDADES);
     }
 
-
-
+    /**
+     * Método para crear una actividad, y guardarla en el archivo XML
+     * @return: Actividad creada
+     * @throws FechaNoValidaException
+     * @throws NombreNoValidoException
+     */
+    public Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
+        Actividad nuevaActividad = pideDatosActividad();
+        agregarActividad(nuevaActividad);
+        return nuevaActividad;
+    }
 
     public void agregarActividad() {
         Actividad actividad = Vista.pideDatosActividad();

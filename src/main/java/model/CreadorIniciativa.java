@@ -37,7 +37,7 @@ public class CreadorIniciativa extends Usuario {
      * @param iniciativa
      * @return
      */
-    public boolean agregarIniciativa(Iniciativa iniciativa) {
+    public boolean crearIniciativa(Iniciativa iniciativa) {
         boolean agregada = false;
         if (iniciativa != null && !iniciativasCreadas.contains(iniciativa)) {
             iniciativasCreadas.add(iniciativa);

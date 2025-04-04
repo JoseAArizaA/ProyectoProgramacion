@@ -39,8 +39,6 @@ public class ViewRegistro {
             }
         }while (!contrasenaValida);
 
-
-
         String email;
         boolean correoValido;
         do{
