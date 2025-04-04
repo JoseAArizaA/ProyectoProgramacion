@@ -66,7 +66,7 @@ public class CreadorController {
     }
 
     /**
-     *Metodo para agregar una iniciativa
+     *Metodo para crear una iniciativa
      */
     public void crearIniciativa() {
         Iniciativa iniciativa = Vista.pideDatosIniciativa(creador);
