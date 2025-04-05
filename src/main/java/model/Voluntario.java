@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Voluntario extends Usuario implements Serializable {
+public class Voluntario extends Usuario {
     private int puntos;
     private ArrayList<Actividad> actividadesAsignadas;
 
@@ -70,7 +70,7 @@ public class Voluntario extends Usuario implements Serializable {
      */
     public boolean unirseActividad(Actividad actividad) {
         boolean agregado = false;
-        if (actividad != null && actividadesAsignadas.contains(actividad)) {
+        if (actividad != null && !actividadesAsignadas.contains(actividad)) {
             actividad.agregarVoluntario(this);
             agregado = true;
         }

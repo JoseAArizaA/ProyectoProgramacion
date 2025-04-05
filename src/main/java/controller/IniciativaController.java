@@ -6,7 +6,6 @@ import exceptions.FechaNoValidaException;
 import exceptions.NombreNoValidoException;
 import model.Actividad;
 import model.Iniciativa;
-import model.Voluntario;
 import utils.HashSetContenedor;
 import utils.Utilidades;
 import utils.XMLManager;
@@ -18,9 +17,9 @@ import java.util.HashSet;
 import static view.Vista.pideDatosActividad;
 
 public class IniciativaController {
-    private Iniciativa iniciativa;
+    private static Iniciativa iniciativa;
     private HashSet<Iniciativa> iniciativas;
-    private HashSet<Actividad> actividades = new HashSet<>();
+    private static HashSet<Actividad> actividades = new HashSet<>();
     static final String ARCHIVO_INICIATIVAS = "iniciativas.xml";
     static final String ARCHIVO_ACTIVIDADES = "actividades.xml";
 
@@ -41,8 +40,10 @@ public class IniciativaController {
 
     /**
      * Método para cargar las actividades desde un archivo XML
+     *
+     * @return
      */
-    public static void cargarActividades() {
+    public static HashSet<Actividad> cargarActividades() {
         File archivo = new File("actividades.xml");
         boolean archivoExiste = archivo.exists();
 
@@ -57,13 +58,14 @@ public class IniciativaController {
                 ArrayList<Actividad> actividades = new ArrayList<>(leeActividades.getSet());
             }
         }
+        return null;
     }
 
     /**
      * Método para agregar una actividad a la lista de actividades
      * @param actividad
      */
-    public void agregarActividad(Actividad actividad) {
+    public static void agregarActividad(Actividad actividad) {
         actividades.add(actividad);
         guardarActividades(new HashSet<>(actividades), ARCHIVO_ACTIVIDADES);
     }
@@ -74,7 +76,7 @@ public class IniciativaController {
      * @throws FechaNoValidaException
      * @throws NombreNoValidoException
      */
-    public Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
+    public static Actividad crearActividad() throws FechaNoValidaException, NombreNoValidoException {
         Actividad nuevaActividad = pideDatosActividad();
         agregarActividad(nuevaActividad);
         return nuevaActividad;
@@ -97,7 +99,7 @@ public class IniciativaController {
     /**
      * Método para eliminar una actividad de la iniciativa
      */
-    public void eliminarActividad() {
+    public static void eliminarActividad() {
         String nombre = Utilidades.pideString("Nombre de la actividad a eliminar: ");
         if (iniciativa.eliminarActividad(nombre)) {
             Vista.mostrarMensaje("Actividad eliminada con éxito.");
@@ -109,7 +111,7 @@ public class IniciativaController {
     /**
      * Método para actualizar una actividad de la iniciativa
      */
-    public void actualizarActividad() {
+    public static void actualizarActividad() {
         Actividad actividad = Vista.pideDatosActividad();
         if (iniciativa.actualizarActividad(actividad)) {
             Vista.mostrarMensaje("Actividad actualizada con éxito.");
@@ -121,7 +123,7 @@ public class IniciativaController {
     /**
      * Método para listar las actividades de la iniciativa
      */
-    public void listarActividades() {
+    public static void listarActividades() {
         if (iniciativa.getActividades().isEmpty()) {
             Vista.mostrarMensaje("No hay actividades creadas.");
         } else {

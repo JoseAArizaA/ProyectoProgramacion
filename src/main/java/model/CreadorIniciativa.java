@@ -113,6 +113,8 @@ public class CreadorIniciativa extends Usuario {
      */
     @Override
     public String toString() {
-        return "Nombre: " + nombre + " Usuario: " + usuario;
+        return "Nombre: " + nombre +
+                "\nUsuario: " + usuario +
+                "Ong: " + Ong;
     }
 }
