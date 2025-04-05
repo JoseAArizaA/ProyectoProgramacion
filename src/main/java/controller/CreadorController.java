@@ -15,7 +15,7 @@ import java.util.List;
 import static controller.IniciativaController.ARCHIVO_INICIATIVAS;
 
 public class CreadorController {
-    private CreadorIniciativa creador;
+    private static CreadorIniciativa creador;
 
     public CreadorController(CreadorIniciativa creador) {
         this.creador = creador;
@@ -33,10 +33,11 @@ public class CreadorController {
 
     /**
      * Método para cargar las iniciativas desde un archivo XML
+     *
      * @param archivoIniciativas: Nombre del archivo XML
      * @return Lista de iniciativas cargadas
      */
-    public static ArrayList<Iniciativa> cargarIniciativas(String archivoIniciativas) {
+    public static HashSet<Iniciativa> cargarIniciativas(String archivoIniciativas) {
         File archivo = new File(archivoIniciativas);
         boolean archivoExiste = archivo.exists();
 
@@ -48,10 +49,10 @@ public class CreadorController {
             HashSetContenedor<Iniciativa> lecturaIniciativas = new HashSetContenedor<>(new HashSet<>());
             HashSetContenedor<Iniciativa> leeIniciativas = XMLManager.readXML(lecturaIniciativas, archivoIniciativas);
             if (leeIniciativas != null && leeIniciativas.getSet() != null) {
-                return new ArrayList<>(leeIniciativas.getSet());
+                return new HashSet<>(leeIniciativas.getSet());
             }
         }
-        return new ArrayList<>();
+        return new HashSet<>();
     }
 
     /**
@@ -68,7 +69,7 @@ public class CreadorController {
     /**
      *Metodo para crear una iniciativa
      */
-    public void crearIniciativa() {
+    public static void crearIniciativa() {
         Iniciativa iniciativa = Vista.pideDatosIniciativa(creador);
         if (creador.crearIniciativa(iniciativa)) {
             Vista.mostrarMensaje("Iniciativa creada con éxito.");
@@ -80,7 +81,7 @@ public class CreadorController {
     /**
      *Metodo para eliminar una iniciativa
      */
-    public void eliminarIniciativa() throws IniciativaNoExisteException {
+    public static void eliminarIniciativa() throws IniciativaNoExisteException {
         String nombre = Vista.pedirNombreIniciativa();
         if (creador.eliminarIniciativa(nombre)) {
             Vista.mostrarMensaje("Iniciativa eliminada con éxito.");
@@ -92,7 +93,7 @@ public class CreadorController {
     /**
      *Metodo para actualizar una iniciativa
      */
-    public void actualizarIniciativa() {
+    public static void actualizarIniciativa() {
         Iniciativa iniciativa = Vista.pideDatosIniciativa(creador);
         if (creador.actualizarIniciativa(iniciativa)) {
             Vista.mostrarMensaje("Iniciativa actualizada con éxito.");
@@ -104,7 +105,7 @@ public class CreadorController {
     /**
      *Metodo para listar las iniciativas
      */
-    public void listarIniciativas() {
+    public static void listarIniciativas() {
         List<Iniciativa> iniciativas = creador.getIniciativasCreadas();
         if (iniciativas.isEmpty()) {
             Vista.mostrarMensaje("No hay iniciativas creadas.");
