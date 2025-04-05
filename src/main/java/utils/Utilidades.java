@@ -41,7 +41,7 @@ public class Utilidades {
 
     public static boolean validarContrasenna(String contrasenna) {
         boolean valido = false;
-        if (!contrasenna.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$")) {
+        if (!contrasenna.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$")) {
             throw new ContrasennaInvalidaException("La contraseña no es válida.");
         } else {
             valido = true;
